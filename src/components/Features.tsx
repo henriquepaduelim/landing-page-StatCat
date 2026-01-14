@@ -36,10 +36,10 @@ const Features = () => {
             </ul>
           </div>
 
-          <figure className="card">
-            <div className="rounded-xl border border-border bg-bg p-3">
+          <figure>
+            <div className="overflow-hidden rounded-2xl bg-surface/90 shadow-strong">
               <video
-                className="w-full rounded-lg"
+                className="h-full w-full object-cover"
                 src={content.features.highlight.video.src}
                 autoPlay
                 muted
@@ -49,7 +49,7 @@ const Features = () => {
                 aria-label={content.features.highlight.video.ariaLabel}
               />
             </div>
-            <figcaption className="mt-3 text-small text-muted">
+            <figcaption className="mt-4 text-small text-muted">
               <span className="block text-xs uppercase tracking-[0.2em] text-muted">
                 {content.features.highlight.video.label}
               </span>
