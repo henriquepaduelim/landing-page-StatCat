@@ -27,8 +27,16 @@ const ReportCardBadge = ({ photoSrc, photoAlt }: ReportCardBadgeProps) => {
     <button
       type="button"
       onClick={() => setPinned((value) => !value)}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onPointerEnter={(event) => {
+        if (event.pointerType !== "touch") {
+          setHovered(true);
+        }
+      }}
+      onPointerLeave={(event) => {
+        if (event.pointerType !== "touch") {
+          setHovered(false);
+        }
+      }}
       className="group relative w-full max-w-[360px] rounded-[28px] shadow-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg sm:max-w-[400px] lg:max-w-[440px]"
       style={{ perspective: "1200px" }}
       aria-pressed={pinned}
@@ -52,7 +60,13 @@ const ReportCardBadge = ({ photoSrc, photoAlt }: ReportCardBadgeProps) => {
                 GK
               </div>
               <div className="h-px w-10 bg-white/50" />
-              <img src={canadaFlagUrl} alt="Canada flag" className="h-6 w-auto" />
+              <div className="h-5 w-10 overflow-hidden">
+                <img
+                  src={canadaFlagUrl}
+                  alt="Canada flag"
+                  className="h-full w-full scale-[1.08] object-cover"
+                />
+              </div>
             </div>
             <div className="flex w-[74%] items-center justify-center bg-[#d9d9d9]">
               <img
