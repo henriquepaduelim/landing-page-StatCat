@@ -41,8 +41,8 @@ export const content = {
       label: "StatCat club app",
       tag: "App Preview",
       video: {
-        src: "/media/EliteOneGoalkeepers.png",
-        label: "Club app preview image",
+        src: "/media/profile.photo.png",
+        label: "Athlete report card photo",
       },
       cards: ["Development", "Report Cards", "Scheduling"],
     },

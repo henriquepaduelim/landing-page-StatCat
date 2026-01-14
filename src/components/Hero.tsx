@@ -1,6 +1,7 @@
 import type { MouseEvent } from "react";
 import { content } from "../data/content";
 import Icon from "./Icon";
+import ReportCardBadge from "./ReportCardBadge";
 import { smoothScrollToId } from "../utils/smoothScroll";
 
 const Hero = () => {
@@ -11,7 +12,7 @@ const Hero = () => {
 
   return (
     <section id="hero" className="section-dark relative overflow-hidden">
-      <div className="mx-auto grid max-w-content gap-16 px-4 py-hero sm:px-6 lg:grid-cols-[0.7fr_1.3fr] lg:items-center lg:px-8">
+      <div className="mx-auto grid max-w-content gap-16 px-4 py-hero sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-8">
         <div className="space-y-6 animate-fade-up">
           <h1 className="font-display text-display text-text">
             {content.hero.headline}
@@ -39,17 +40,11 @@ const Hero = () => {
           </ul>
         </div>
 
-        <div className="relative animate-fade-in lg:-mr-8">
-          <div className="relative overflow-hidden rounded-[28px] bg-surface shadow-strong">
-            <div className="aspect-[16/10] w-full">
-              <img
-                className="h-full w-full object-cover"
-                src={content.hero.preview.video.src}
-                alt={content.hero.preview.video.label}
-                loading="lazy"
-              />
-            </div>
-          </div>
+        <div className="relative flex justify-center animate-fade-in lg:justify-end">
+          <ReportCardBadge
+            photoSrc={content.hero.preview.video.src}
+            photoAlt={content.hero.preview.video.label}
+          />
         </div>
       </div>
     </section>
