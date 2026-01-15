@@ -13,7 +13,8 @@ const PricingCalculator = () => {
     pricing.defaultAthletes.toString()
   );
   const [highlight, setHighlight] = useState(false);
-  const initialUpdate = useRef(true);
+  const [copied, setCopied] = useState(false);
+  const copyTimeoutRef = useRef<number | null>(null);
 
   const minAthletes = pricing.minAthletes;
   const maxAthletes = pricing.maxAthletes;
@@ -41,23 +42,12 @@ const PricingCalculator = () => {
   }, []);
 
   useEffect(() => {
-    if (typeof window === "undefined") {
-      return;
-    }
-
-    if (initialUpdate.current) {
-      initialUpdate.current = false;
-      return;
-    }
-
-    const handler = window.setTimeout(() => {
-      const url = new URL(window.location.href);
-      url.searchParams.set("athletes", athleteCount.toString());
-      window.history.replaceState(null, "", url.toString());
-    }, 250);
-
-    return () => window.clearTimeout(handler);
-  }, [athleteCount]);
+    return () => {
+      if (copyTimeoutRef.current) {
+        window.clearTimeout(copyTimeoutRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     if (typeof window === "undefined") {
@@ -153,6 +143,30 @@ const PricingCalculator = () => {
   const handleStepper = (direction: number, shiftKey: boolean) => {
     const step = shiftKey ? 10 : 1;
     applyAthleteCount(athleteCount + direction * step);
+  };
+
+  const handleShare = async () => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const url = new URL(window.location.href);
+    url.searchParams.set("athletes", athleteCount.toString());
+    window.history.replaceState(null, "", url.toString());
+
+    try {
+      await navigator.clipboard?.writeText(url.toString());
+      setCopied(true);
+      if (copyTimeoutRef.current) {
+        window.clearTimeout(copyTimeoutRef.current);
+      }
+      copyTimeoutRef.current = window.setTimeout(() => {
+        setCopied(false);
+        copyTimeoutRef.current = null;
+      }, 2000);
+    } catch {
+      setCopied(false);
+    }
   };
 
   const resultHighlight = highlight
@@ -348,6 +362,15 @@ const PricingCalculator = () => {
             <p>{pricing.calculator.anchorLine}</p>
             <p>{pricing.calculator.riskReducerLine}</p>
             <p>{pricing.disclaimer}</p>
+            <button
+              type="button"
+              onClick={handleShare}
+              className="mt-2 inline-flex items-center gap-2 rounded-full border border-border/60 bg-surface/80 px-3 py-1 text-xs font-semibold text-text transition hover:bg-surface focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+              aria-label={pricing.calculator.shareTooltip}
+            >
+              <Icon name="content_copy" className="text-base" />
+              {copied ? pricing.calculator.shareCopied : pricing.calculator.shareLabel}
+            </button>
           </div>
         </div>
 
