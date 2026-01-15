@@ -8,7 +8,23 @@ const logoUrl = new URL("../../statCatLogo2-black.png", import.meta.url).href;
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isCompact, setIsCompact] = useState(false);
   const drawerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined") {
+      return;
+    }
+
+    const handleScroll = () => {
+      setIsCompact(window.scrollY > 16);
+    };
+
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   useEffect(() => {
     if (!menuOpen || !drawerRef.current) {
@@ -32,16 +48,12 @@ const Header = () => {
   };
 
   return (
-    <header className="section-dark sticky top-0 z-50 border-b border-border/40 bg-surface/90 backdrop-blur">
-      <div className="marquee h-10 border-b border-border/40 bg-surface/80">
-        <span className="sr-only">{content.hero.trustLine}</span>
-        <div className="marquee-track" aria-hidden="true">
-          <span className="px-6 text-xs uppercase tracking-[0.32em] text-muted">
-            {content.hero.trustLine}
-          </span>
-        </div>
-      </div>
-      <div className="mx-auto flex h-24 max-w-content items-center justify-between px-4 sm:px-6 lg:px-8">
+    <header className="section-dark border-b border-border/40 bg-surface">
+      <div
+        className={`mx-auto flex max-w-content items-center justify-between px-4 transition-all duration-200 sm:px-6 lg:px-8 ${
+          isCompact ? "h-16" : "h-24"
+        }`}
+      >
         <a
           href="#hero"
           onClick={handleNavClick("hero")}

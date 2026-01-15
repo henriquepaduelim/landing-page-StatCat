@@ -102,9 +102,7 @@ const PricingCalculator = () => {
   const perAthleteRate = pricingResult.perAthleteRate ?? 0;
   const estimatedTotal = pricingResult.estimatedTotal ?? 0;
   const annualTotal = estimatedTotal;
-  const setupFeeAmount = pricing.setupFee.amount;
-  const hasSetupFee =
-    typeof setupFeeAmount === "number" && Number.isFinite(setupFeeAmount);
+  const monthlyEquivalent = annualTotal / 12;
 
   const savingsLabel = isContactOnly
     ? pricing.calculator.contactNote
@@ -125,10 +123,10 @@ const PricingCalculator = () => {
       : tierRateTemplate
     : pricing.calculator.contactNote;
 
-  const annualTotalNote = pricing.calculator.annualTotalNoteTemplate.replace(
-    "{count}",
-    athleteCount.toString()
-  );
+  const monthlyEquivalentLabel = formatCAD(monthlyEquivalent, {
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
+  });
 
   const handleInputChange = (value: string) => {
     setInputValue(value);
@@ -178,191 +176,178 @@ const PricingCalculator = () => {
           </div>
         </div>
 
-        <div className="mt-8 grid gap-6 lg:grid-cols-[0.9fr_1.1fr] lg:items-start">
-          <div className="rounded-xl border border-border/70 bg-bg p-5">
-            <div className="flex flex-wrap items-center justify-between gap-4">
-              <div>
-                <p className="text-small text-muted">
-                  {pricing.calculator.athleteCountLabel}
-                </p>
-                <p className="text-3xl font-semibold text-text font-mono">
-                  {athleteCount}
-                </p>
-              </div>
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={(event) => handleStepper(-1, event.shiftKey)}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-sm font-semibold text-text transition hover:bg-bg focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
-                  aria-label="Decrease athlete count"
-                >
-                  -
-                </button>
-                <div className="w-24">
-                  <label className="sr-only" htmlFor="athleteCount">
-                    {pricing.calculator.athleteInputLabel}
-                  </label>
-                  <input
-                    id="athleteCount"
-                    type="number"
-                    min={minAthletes}
-                    max={maxAthletes}
-                    value={inputValue}
-                    onChange={(event) => handleInputChange(event.target.value)}
-                    onBlur={commitInput}
-                    onKeyDown={(event) => {
-                      if (event.key === "Enter") {
-                        commitInput();
-                      }
-                    }}
-                    className="mt-1 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm"
-                  />
+        <div className="mt-8 space-y-6">
+          <div className="grid gap-6 lg:grid-cols-3">
+            <div className="rounded-xl border border-border/70 bg-bg p-5">
+              <div className="flex flex-wrap items-center justify-between gap-4">
+                <div>
+                  <p className="text-small text-muted">
+                    {pricing.calculator.athleteCountLabel}
+                  </p>
+                  <p className="text-3xl font-semibold text-text font-mono">
+                    {athleteCount}
+                  </p>
                 </div>
-                <button
-                  type="button"
-                  onClick={(event) => handleStepper(1, event.shiftKey)}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-sm font-semibold text-text transition hover:bg-bg focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
-                  aria-label="Increase athlete count"
+                <div className="flex items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={(event) => handleStepper(-1, event.shiftKey)}
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-sm font-semibold text-text transition hover:bg-bg focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                    aria-label="Decrease athlete count"
+                  >
+                    -
+                  </button>
+                  <div className="w-24">
+                    <label className="sr-only" htmlFor="athleteCount">
+                      {pricing.calculator.athleteInputLabel}
+                    </label>
+                    <input
+                      id="athleteCount"
+                      type="number"
+                      min={minAthletes}
+                      max={maxAthletes}
+                      value={inputValue}
+                      onChange={(event) => handleInputChange(event.target.value)}
+                      onBlur={commitInput}
+                      onKeyDown={(event) => {
+                        if (event.key === "Enter") {
+                          commitInput();
+                        }
+                      }}
+                      className="mt-1 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm"
+                    />
+                  </div>
+                  <button
+                    type="button"
+                    onClick={(event) => handleStepper(1, event.shiftKey)}
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-sm font-semibold text-text transition hover:bg-bg focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                    aria-label="Increase athlete count"
+                  >
+                    +
+                  </button>
+                </div>
+              </div>
+
+              <div className="mt-6">
+                <Slider.Root
+                  min={minAthletes}
+                  max={maxAthletes}
+                  step={1}
+                  value={[athleteCount]}
+                  onValueChange={(value) => applyAthleteCount(value[0])}
+                  className="relative flex w-full touch-none select-none items-center"
+                  aria-label={pricing.calculator.athleteRangeLabel}
                 >
-                  +
-                </button>
+                  <Slider.Track className="relative h-2 w-full grow rounded-full bg-border/60">
+                    <Slider.Range className="absolute h-full rounded-full bg-primary" />
+                  </Slider.Track>
+                  <Slider.Thumb className="block h-4 w-4 rounded-full border border-border bg-surface shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40" />
+                </Slider.Root>
               </div>
             </div>
 
-            <div className="mt-6">
-              <Slider.Root
-                min={minAthletes}
-                max={maxAthletes}
-                step={1}
-                value={[athleteCount]}
-                onValueChange={(value) => applyAthleteCount(value[0])}
-                className="relative flex w-full touch-none select-none items-center"
-                aria-label={pricing.calculator.athleteRangeLabel}
-              >
-                <Slider.Track className="relative h-2 w-full grow rounded-full bg-border/60">
-                  <Slider.Range className="absolute h-full rounded-full bg-primary" />
-                </Slider.Track>
-                <Slider.Thumb className="block h-4 w-4 rounded-full border border-border bg-surface shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40" />
-              </Slider.Root>
-            </div>
-          </div>
-
-          <div className="space-y-6">
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div
-                className={`rounded-lg border border-border/70 bg-bg p-5 transition motion-safe:transition ${resultHighlight}`}
-              >
-                <p className="text-small text-muted">
-                  {pricing.calculator.perAthleteLabelAnnual}
-                </p>
-                <p className="mt-3 text-3xl font-semibold text-text font-mono">
+            <div
+              className={`rounded-lg border border-border/70 bg-bg p-5 transition motion-safe:transition ${resultHighlight}`}
+            >
+              <p className="text-small text-muted">
+                {pricing.calculator.perAthleteLabelAnnual}
+              </p>
+              <p className="mt-3 text-2xl font-semibold text-text font-mono break-words">
                 {isContactOnly
                   ? pricing.calculator.contactLabel
                   : formatCAD(perAthleteRate, {
                       minimumFractionDigits: 2,
                       maximumFractionDigits: 2,
                     })}
-                </p>
-                <p className="mt-2 text-xs text-muted">
-                  {tierRateNote}
-                </p>
-              </div>
-              <div
-                className={`rounded-lg border border-border/70 bg-bg p-5 transition motion-safe:transition ${resultHighlight}`}
-              >
-                <p className="text-small text-muted">
-                  {pricing.calculator.estimatedTotalLabel}
-                  {pricing.calculator.estimatedAnnualSuffix}
-                </p>
-                <p className="mt-3 text-2xl font-semibold text-text font-mono">
-                  {isContactOnly
-                    ? pricing.calculator.contactLabel
-                    : formatCAD(annualTotal, {
-                        minimumFractionDigits: 0,
-                        maximumFractionDigits: 0,
-                      })}
-                </p>
-                <p className="mt-2 text-xs text-muted">
-                  {isContactOnly ? pricing.calculator.contactNote : annualTotalNote}
-                </p>
-                {!isContactOnly ? (
-                  <p className="mt-1 text-xs text-muted">{savingsLabel}</p>
-                ) : null}
-              </div>
+              </p>
+              <p className="mt-2 text-xs text-muted">
+                {pricing.calculator.perAthleteSupport}
+              </p>
+              <p className="mt-1 text-xs text-muted">{tierRateNote}</p>
             </div>
 
-            <div className="rounded-xl border border-border/70 bg-surface/80 p-5">
-              <div className="flex items-center gap-2">
-                <p className="text-small uppercase tracking-[0.2em] text-muted">
-                  {pricing.calculator.breakdownTitle}
-                </p>
-                <Tooltip.Root>
-                  <Tooltip.Trigger asChild>
-                    <button
-                      type="button"
-                      className="inline-flex items-center text-muted transition hover:text-text focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
-                      aria-label={pricing.calculator.setupTooltip}
-                    >
-                      <Icon name="info" className="text-base" />
-                    </button>
-                  </Tooltip.Trigger>
-                  <Tooltip.Portal>
-                    <Tooltip.Content
-                      sideOffset={6}
-                      className="rounded-md border border-border bg-surface px-3 py-2 text-xs text-text shadow-strong"
-                    >
-                      {pricing.calculator.setupTooltip}
-                    </Tooltip.Content>
-                  </Tooltip.Portal>
-                </Tooltip.Root>
-              </div>
-              <div className="mt-4 grid gap-4 sm:grid-cols-2">
-                <div className="rounded-lg border border-border/70 bg-bg p-4">
-                  <p className="text-small text-muted">
-                    {pricing.calculator.breakdownFirstYearLabel}
-                  </p>
-                {isContactOnly ? (
-                  <p className="mt-2 text-xl font-semibold text-text font-mono">
-                    {pricing.calculator.contactLabel}
-                  </p>
-                ) : hasSetupFee ? (
-                  <p className="mt-2 text-xl font-semibold text-text font-mono">
-                    {formatCAD(annualTotal + setupFeeAmount, {
+            <div
+              className={`rounded-lg border border-border/70 bg-bg p-5 transition motion-safe:transition ${resultHighlight}`}
+            >
+              <p className="text-small text-muted">
+                {pricing.calculator.estimatedTotalLabel}
+              </p>
+              <p className="mt-3 text-3xl font-semibold text-text font-mono break-words">
+                {isContactOnly
+                  ? pricing.calculator.contactLabel
+                  : `${formatCAD(annualTotal, {
                       minimumFractionDigits: 0,
                       maximumFractionDigits: 0,
-                    })}
-                  </p>
-                ) : (
-                  <p className="mt-2 text-sm font-semibold text-text">
-                    {pricing.setupFee.note}
-                  </p>
-                )}
+                    })} / year`}
+              </p>
+              <p className="mt-2 text-xs text-muted">
+                {isContactOnly
+                  ? pricing.calculator.contactNote
+                  : `Less than ${monthlyEquivalentLabel} per month for your entire club.`}
+              </p>
+              {!isContactOnly ? (
+                <p className="mt-1 text-xs text-muted">{savingsLabel}</p>
+              ) : null}
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-border/70 bg-surface/80 p-5">
+            <div className="flex items-center gap-2">
+              <p className="text-small uppercase tracking-[0.2em] text-muted">
+                {pricing.calculator.breakdownTitle}
+              </p>
+              <Tooltip.Root>
+                <Tooltip.Trigger asChild>
+                  <button
+                    type="button"
+                    className="inline-flex items-center text-muted transition hover:text-text focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                    aria-label={pricing.calculator.setupTooltip}
+                  >
+                    <Icon name="info" className="text-base" />
+                  </button>
+                </Tooltip.Trigger>
+                <Tooltip.Portal>
+                  <Tooltip.Content
+                    sideOffset={6}
+                    className="rounded-md border border-border bg-surface px-3 py-2 text-xs text-text shadow-strong"
+                  >
+                    {pricing.calculator.setupTooltip}
+                  </Tooltip.Content>
+                </Tooltip.Portal>
+              </Tooltip.Root>
+            </div>
+            <div className="mt-4 grid gap-4 sm:grid-cols-2">
+              <div className="rounded-lg border border-border/70 bg-bg p-4">
+                <p className="text-small font-semibold text-text">
+                  {pricing.calculator.breakdownFirstYearLabel}
+                </p>
                 <p className="mt-2 text-xs text-muted">
-                  {hasSetupFee
-                    ? pricing.calculator.breakdownNoteAnnual
-                    : pricing.setupFee.description}
+                  {pricing.calculator.breakdownFirstYearBody}
                 </p>
               </div>
-                <div className="rounded-lg border border-border/70 bg-bg p-4">
-                  <p className="text-small text-muted">
-                    {pricing.calculator.breakdownYearTwoLabel}
-                  </p>
-                  <p className="mt-2 text-xl font-semibold text-text font-mono">
-                    {isContactOnly
-                      ? pricing.calculator.contactLabel
-                      : formatCAD(annualTotal, {
-                          minimumFractionDigits: 0,
-                          maximumFractionDigits: 0,
-                        })}
-                  </p>
-                  <p className="mt-2 text-xs text-muted">
-                    {pricing.calculator.annualNote}
-                  </p>
-                </div>
+              <div className="rounded-lg border border-border/70 bg-bg p-4">
+                <p className="text-small text-muted">
+                  {pricing.calculator.breakdownYearTwoLabel}
+                </p>
+                <p className="mt-2 text-xl font-semibold text-text font-mono break-words">
+                  {isContactOnly
+                    ? pricing.calculator.contactLabel
+                    : `${formatCAD(annualTotal, {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                      })} / year`}
+                </p>
+                <p className="mt-2 text-xs text-muted">
+                  {pricing.calculator.annualNote}
+                </p>
               </div>
             </div>
+          </div>
 
-            <p className="text-xs text-muted">{pricing.disclaimer}</p>
+          <div className="space-y-1 text-xs text-muted">
+            <p>{pricing.calculator.anchorLine}</p>
+            <p>{pricing.calculator.riskReducerLine}</p>
+            <p>{pricing.disclaimer}</p>
           </div>
         </div>
 

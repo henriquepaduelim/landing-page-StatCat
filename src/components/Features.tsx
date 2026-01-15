@@ -65,8 +65,8 @@ const Features = () => {
               className="card animate-fade-up"
               style={{ animationDelay: `${index * 80}ms` }}
             >
-              <div className="flex h-12 w-12 items-center justify-center rounded-md bg-primary/10 text-primary">
-                <Icon name={feature.icon} className="text-2xl" />
+              <div className="grid h-12 w-12 place-items-center rounded-md bg-primary/10 text-primary">
+                <Icon name={feature.icon} className="text-2xl leading-none" />
               </div>
               <h3 className="mt-4 text-title font-semibold text-text">
                 {feature.title}

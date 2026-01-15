@@ -81,7 +81,7 @@ const ReportCardBadge = ({ photoSrc, photoAlt }: ReportCardBadgeProps) => {
             </div>
           </div>
 
-          <div className="flex shrink-0 items-center justify-between bg-[#2fe5ad] px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#0b0f1a]">
+          <div className="flex shrink-0 items-center justify-between bg-[#2fe5ad] px-8 py-2 text-[15px] font-semibold uppercase tracking-[0.2em] text-[#0b0f1a]">
             <span>Leadership score</span>
             <span className="text-base font-bold">84</span>
           </div>

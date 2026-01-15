@@ -1,6 +1,6 @@
 export const theme = {
   colors: {
-    primary: "18 126 160",
+    primary: "239 71 111",
     secondary: "255 209 102",
     accent: "229 158 54",
     bg: "245 247 249",
@@ -13,8 +13,8 @@ export const theme = {
     dark: {
       bg: "10 13 18",
       surface: "18 24 33",
-      text: "238 242 247",
-      muted: "168 178 191",
+      text: "247 37 133",
+      muted: "242 243 244",
       border: "35 43 58",
     },
     light: {

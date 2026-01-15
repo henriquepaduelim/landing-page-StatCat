@@ -9,6 +9,7 @@ import Testimonials from "./components/Testimonials";
 import FAQ from "./components/FAQ";
 import CTA from "./components/CTA";
 import Footer from "./components/Footer";
+import ScrollToTop from "./components/ScrollToTop";
 
 const App = () => {
   return (
@@ -26,6 +27,7 @@ const App = () => {
         <CTA />
       </main>
       <Footer />
+      <ScrollToTop />
     </div>
   );
 };

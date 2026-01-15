@@ -21,8 +21,8 @@ const HowItWorks = () => {
               style={{ animationDelay: `${index * 120}ms` }}
             >
               <div className="flex items-center justify-between">
-                <div className="flex h-12 w-12 items-center justify-center rounded-md bg-secondary/10 text-secondary">
-                  <Icon name={step.icon} className="text-2xl" />
+                <div className="grid h-12 w-12 place-items-center rounded-md bg-secondary/10 text-secondary">
+                  <Icon name={step.icon} className="text-2xl leading-none" />
                 </div>
                 <span className="text-sm font-semibold text-muted">
                   {content.howItWorks.stepLabel} {index + 1}

@@ -23,19 +23,21 @@ export const content = {
     { label: "FAQ", href: "faq" },
   ],
   hero: {
-    trustLine:
-      "Proudly Canadian. Built for sports programs that want professional standards.",
+    trustLine: {
+      primary: "Proudly Canadian",
+      secondary: "The all-in-one platform for modern football programs.",
+    },
     headline:
-      "Your club's own app for tracking athlete development over time.",
+      "Give your club a branded app that proves progress.",
     subheadline:
-      "StatCat is a development and communication platform for football programs. Branded as your own app, it documents evaluations, report cards, schedules, and family updates from sessions to seasons.",
+      "StatCat brings development tracking, report cards, schedules, and family updates into one polished experience - branded for your club.",
     primaryCta: "Book a demo",
     secondaryCta: "See how it works",
     highlights: [
-      "Your club's own app",
-      "Athlete development focus",
-      "Clear communication",
-      "Proudly Canadian",
+      "Your own branded club app",
+      "Development tracking from sessions to seasons",
+      "Professional report cards for families",
+      "One hub for updates and approvals",
     ],
     preview: {
       label: "StatCat club app",
@@ -85,37 +87,37 @@ export const content = {
       {
         title: "Athlete development tracking",
         description:
-          "Document sessions, combines, and evaluations so progress is measured beyond the scoreboard.",
+          "Capture every session, combine, and evaluation so progress tells a fuller story than the scoreboard.",
         icon: "timeline",
       },
       {
         title: "Report cards and evaluations",
         description:
-          "Create clear performance summaries that parents and athletes can understand.",
+          "Turn coaching notes into clear, shareable report cards for athletes and families.",
         icon: "assignment",
       },
       {
         title: "Communication hub",
         description:
-          "Centralize updates, approvals, and feedback to replace scattered messaging.",
+          "Keep updates, approvals, and feedback in one place so conversations stay clean and fast.",
         icon: "forum",
       },
       {
         title: "Scheduling and events",
         description:
-          "One calendar for training, evaluations, and events so nothing gets missed.",
+          "Run training, testing, and events from one calendar so everyone shows up ready.",
         icon: "event_available",
       },
       {
         title: "Your club's own app",
         description:
-          "Your name, logo, and colors make the app feel like your club and build credibility.",
+          "Your logo, colors, and name make the app feel unmistakably yours and more professional.",
         icon: "palette",
       },
       {
         title: "Digital presence and club website",
         description:
-          "Optional website creation and maintenance aligned to your app branding.",
+          "Launch and maintain a club website that matches your app's look and message.",
         icon: "language",
       },
     ],
@@ -221,17 +223,19 @@ export const content = {
     },
     calculator: {
       label: "Calculator",
-      heading: "See how pricing scales with your club",
+      heading: "Simple, predictable pricing for growing clubs",
       helper:
-        "Set the athlete count to see your club's estimate.",
+        "No hidden fees. Pay only for active athletes. Cancel anytime.",
       contractBadge: "Annual pricing",
       athleteCountLabel: "Athlete count",
       athleteInputLabel: "Athletes",
       athleteRangeLabel: "Athlete count",
-      perAthleteLabelAnnual: "Per athlete / month (annual)",
+      perAthleteLabelAnnual: "Per athlete / month (billed annually)",
       perAthleteLabelMonthly: "Per athlete / month (monthly plan)",
+      perAthleteSupport:
+        "Includes full platform access, performance tracking, and club branding.",
       perAthleteAnnualSuffix: "",
-      estimatedTotalLabel: "Estimated annual total",
+      estimatedTotalLabel: "Estimated annual investment",
       estimatedMonthlySuffix: " / month",
       estimatedAnnualSuffix: "",
       monthlyNote: "Monthly billing uses a flat per-athlete rate.",
@@ -256,13 +260,19 @@ export const content = {
       shareLabel: "Copy link",
       shareTooltip: "Share this estimate with your club.",
       shareCopied: "Link copied",
-      breakdownTitle: "Cost outlook",
-      breakdownFirstYearLabel: "First year estimate",
+      breakdownTitle: "FIRST YEAR & RENEWAL",
+      breakdownFirstYearLabel: "First-year setup & onboarding",
+      breakdownFirstYearBody:
+        "One-time setup based on your club size and needs. We define scope together during the demo.",
       breakdownYearTwoLabel: "Year 2+ estimate",
       breakdownNoteAnnual: "Includes one-time setup.",
       breakdownNoteMonthly: "Monthly plan shown as an annualized estimate.",
       setupTooltip:
         "Setup includes club-branded app configuration, onboarding, and launch support.",
+      anchorLine:
+        "Comparable tools often charge CAD $3-$6 per athlete/month.",
+      riskReducerLine:
+        "No long-term lock-in. We earn your renewal every year.",
     },
     setupFee: {
       eyebrow: "Setup & launch",
@@ -308,8 +318,8 @@ export const content = {
     cta: {
       title: "Not sure what fits your club?",
       text: "We’ll help you choose the right setup based on your athlete count and goals.",
-      primaryLabel: "Book a demo",
-      secondaryLabel: "Talk to us about pricing",
+      primaryLabel: "Book a 15-min demo",
+      secondaryLabel: "See if StatCat fits your club",
     },
   },
   testimonials: {
