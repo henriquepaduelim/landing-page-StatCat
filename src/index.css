@@ -123,6 +123,12 @@ section {
     --color-secondary: 255 209 102;
   }
 
+  .section-invert-text {
+    color: rgb(var(--section-dark-muted));
+    --color-text: var(--section-dark-muted);
+    --color-muted: var(--section-dark-text);
+  }
+
   .marquee {
     @apply relative flex items-center overflow-hidden whitespace-nowrap;
   }
@@ -228,6 +234,15 @@ section {
     animation: nav-underline 1.4s linear infinite;
     box-shadow: 0 10px 24px -20px rgb(var(--color-primary) / 0.8);
     transform: translateY(-1px);
+  }
+
+  .site-header .site-nav-link-mobile {
+    display: block;
+    width: 100%;
+    padding: 0.6rem 0.85rem;
+    border-radius: 0.75rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.18em;
   }
 
   .pill {

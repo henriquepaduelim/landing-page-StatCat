@@ -133,7 +133,7 @@ const Header = () => {
                   key={item.href}
                   href={`#${item.href}`}
                   onClick={handleNavClick(item.href)}
-                  className="rounded-md px-2 py-2 text-muted transition hover:bg-bg hover:text-text"
+                  className="site-nav-link site-nav-link-mobile"
                 >
                   {item.label}
                 </a>
