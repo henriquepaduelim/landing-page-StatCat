@@ -48,7 +48,7 @@ const Header = () => {
   };
 
   return (
-    <header className="section-dark border-b border-border/40 bg-surface">
+    <header className="site-header section-dark border-b border-border/40">
       <div
         className={`mx-auto flex max-w-content items-center justify-between px-4 transition-all duration-200 sm:px-6 lg:px-8 ${
           isCompact ? "h-16" : "h-24"
@@ -57,12 +57,12 @@ const Header = () => {
         <a
           href="#hero"
           onClick={handleNavClick("hero")}
-          className="flex h-full items-center"
+          className="flex h-full items-center py-0"
         >
           <img
             src={logoUrl}
             alt={`${content.brand.name} logo`}
-            className="h-[95%] w-auto object-contain"
+            className="h-28 w-auto object-contain"
           />
         </a>
 
@@ -75,7 +75,7 @@ const Header = () => {
               key={item.href}
               href={`#${item.href}`}
               onClick={handleNavClick(item.href)}
-              className="transition hover:text-text"
+              className="site-nav-link"
             >
               {item.label}
             </a>

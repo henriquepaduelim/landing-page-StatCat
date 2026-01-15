@@ -1,4 +1,5 @@
 import Header from "./components/Header";
+import TrustLine from "./components/TrustLine";
 import Hero from "./components/Hero";
 import SocialProof from "./components/SocialProof";
 import Features from "./components/Features";
@@ -14,6 +15,7 @@ import ScrollToTop from "./components/ScrollToTop";
 const App = () => {
   return (
     <div className="page-bg min-h-screen text-text">
+      <TrustLine />
       <Header />
       <main>
         <Hero />
