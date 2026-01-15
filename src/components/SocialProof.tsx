@@ -27,24 +27,39 @@ const SocialProof = () => {
           </div>
           <div className="grid gap-4 sm:grid-cols-2">
             {content.socialProof.metrics.map((metric) => {
+              const isAppCard = metric.value === "Your own app";
               const imageSrc =
                 metric.value === "Sessions to seasons"
                   ? "/media/mockupiphone.png"
                   : metric.value === "Report cards"
                     ? "/media/reportcardsIphone.png"
-                    : null;
+                    : isAppCard
+                      ? "/media/elite1iphoneicone.svg"
+                      : null;
+              const imageAlt = isAppCard
+                ? "StatCat app icon"
+                : "StatCat mobile app mockup";
+              const zoomOriginClass = isAppCard
+                ? "origin-[25%_75%]"
+                : "origin-center";
+              const hoverScaleClass = isAppCard
+                ? "group-hover:scale-[2.5]"
+                : "group-hover:scale-[1.25]";
+              const imageFitClass = isAppCard ? "object-contain" : "object-cover";
 
               return (
                 <div
                   key={metric.label}
                   className="card-muted group relative min-h-[200px] overflow-hidden p-0"
                 >
-                  <div className="absolute inset-0 transition-transform duration-300 group-hover:scale-[1.13]">
+                  <div
+                    className={`absolute inset-0 transition-transform duration-300 ${hoverScaleClass} ${zoomOriginClass}`}
+                  >
                     {imageSrc ? (
                       <img
                         src={imageSrc}
-                        alt="StatCat mobile app mockup"
-                        className="h-full w-full object-cover"
+                        alt={imageAlt}
+                        className={`h-full w-full ${imageFitClass}`}
                       />
                     ) : (
                       <div className="h-full w-full bg-gradient-to-br from-slate-900/70 via-slate-800/60 to-slate-900/80" />
