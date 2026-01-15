@@ -25,7 +25,7 @@ export const content = {
   hero: {
     trustLine: {
       primary: "Proudly Canadian",
-      secondary: "The all-in-one platform for modern football programs.",
+      secondary: "The all-in-one management platform for modern sports programs.",
     },
     headline:
       "Give your club a branded app that proves progress.",
