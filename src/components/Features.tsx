@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { content } from "../data/content";
 import Icon from "./Icon";
 
@@ -25,10 +25,89 @@ const Features = () => {
       alt: "Communication hub screen on iPhone",
     },
   ];
+  const carouselSlides = [...carouselImages, ...carouselImages];
   const gridItems = content.features.items.filter(
     (item) => !carouselImages.some((image) => image.key === item.title)
   );
   const carouselRef = useRef<HTMLDivElement>(null);
+  const carouselOffsetRef = useRef(0);
+  const carouselAdjustingRef = useRef(false);
+
+  const setCarouselOffset = () => {
+    const node = carouselRef.current;
+    if (!node) {
+      return;
+    }
+    const children = Array.from(node.children) as HTMLElement[];
+    if (children.length < carouselImages.length) {
+      return;
+    }
+    const computed = getComputedStyle(node);
+    const gapValue = Number.parseFloat(
+      computed.columnGap || computed.gap || "0"
+    );
+    const gap = Number.isFinite(gapValue) ? gapValue : 0;
+    let width = 0;
+    for (let index = 0; index < carouselImages.length; index += 1) {
+      width += children[index]?.getBoundingClientRect().width ?? 0;
+    }
+    const offset = width + gap * carouselImages.length;
+    if (!Number.isFinite(offset) || offset <= 0) {
+      return;
+    }
+    carouselOffsetRef.current = offset;
+    carouselAdjustingRef.current = true;
+    node.scrollLeft = offset;
+    requestAnimationFrame(() => {
+      carouselAdjustingRef.current = false;
+    });
+  };
+
+  useEffect(() => {
+    const node = carouselRef.current;
+    if (!node) {
+      return undefined;
+    }
+    const updateOffset = () => {
+      setCarouselOffset();
+    };
+    updateOffset();
+    window.addEventListener("resize", updateOffset);
+    return () => {
+      window.removeEventListener("resize", updateOffset);
+    };
+  }, [carouselImages.length]);
+
+  const handleCarouselScroll = () => {
+    if (carouselAdjustingRef.current) {
+      return;
+    }
+    const node = carouselRef.current;
+    const offset = carouselOffsetRef.current;
+    if (!node || offset <= 0) {
+      return;
+    }
+    const maxScrollLeft = node.scrollWidth - node.clientWidth;
+    if (maxScrollLeft <= 0) {
+      return;
+    }
+    const edgeBuffer = 2;
+    if (node.scrollLeft <= edgeBuffer) {
+      carouselAdjustingRef.current = true;
+      node.scrollLeft = node.scrollLeft + offset;
+      requestAnimationFrame(() => {
+        carouselAdjustingRef.current = false;
+      });
+      return;
+    }
+    if (node.scrollLeft >= maxScrollLeft - edgeBuffer) {
+      carouselAdjustingRef.current = true;
+      node.scrollLeft = node.scrollLeft - offset;
+      requestAnimationFrame(() => {
+        carouselAdjustingRef.current = false;
+      });
+    }
+  };
 
   const scrollCarousel = (direction: number) => {
     const node = carouselRef.current;
@@ -103,21 +182,26 @@ const Features = () => {
             <div
               id="features-carousel"
               ref={carouselRef}
+              onScroll={handleCarouselScroll}
               className="carousel-scrollbar-hidden flex snap-x snap-mandatory gap-[0.45rem] overflow-x-auto scroll-smooth pb-4 px-4 sm:px-6 lg:px-8"
             >
-              {carouselImages.map((image) => (
-                <div
-                  key={image.key}
-                  className="group shrink-0 snap-start overflow-hidden"
-                >
-                  <img
-                    src={image.src}
-                    alt={image.alt}
-                    className="block h-[800px] w-[400px] max-h-[80vh] max-w-[90vw] transform-gpu object-contain opacity-65 transition duration-300 ease-out group-hover:scale-[1.03] group-hover:opacity-100"
-                    loading="lazy"
-                  />
-                </div>
-              ))}
+              {carouselSlides.map((image, index) => {
+                const isDuplicate = index >= carouselImages.length;
+                return (
+                  <div
+                    key={`${image.key}-${index}`}
+                    className="group shrink-0 snap-start overflow-hidden"
+                    aria-hidden={isDuplicate ? "true" : undefined}
+                  >
+                    <img
+                      src={image.src}
+                      alt={isDuplicate ? "" : image.alt}
+                      className="block h-[800px] w-[400px] max-h-[80vh] max-w-[90vw] transform-gpu object-contain opacity-65 transition duration-300 ease-out group-hover:scale-[1.03] group-hover:opacity-100"
+                      loading="lazy"
+                    />
+                  </div>
+                );
+              })}
             </div>
             <button
               type="button"
