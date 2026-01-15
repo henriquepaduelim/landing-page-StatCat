@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import type { TransitionEvent } from "react";
+import type { TouchEvent, TransitionEvent } from "react";
 import { content } from "../data/content";
 import Icon from "./Icon";
 
@@ -38,6 +38,9 @@ const Features = () => {
   const slideOffsetRef = useRef(0);
   const isAnimatingRef = useRef(false);
   const pendingDirectionRef = useRef<1 | -1 | 0>(0);
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+  const touchLastRef = useRef<{ x: number; y: number } | null>(null);
+  const touchHandledRef = useRef(false);
 
   const updateSlideOffset = () => {
     const node = carouselRef.current;
@@ -98,6 +101,71 @@ const Features = () => {
       setTransitionEnabled(true);
       setCarouselShift(0);
     });
+  };
+
+  const handleTouchStart = (event: TouchEvent<HTMLDivElement>) => {
+    if (isAnimatingRef.current) {
+      return;
+    }
+    const touch = event.touches[0];
+    if (!touch) {
+      return;
+    }
+    const point = { x: touch.clientX, y: touch.clientY };
+    touchStartRef.current = point;
+    touchLastRef.current = point;
+    touchHandledRef.current = false;
+  };
+
+  const handleTouchMove = (event: TouchEvent<HTMLDivElement>) => {
+    if (!touchStartRef.current) {
+      return;
+    }
+    const touch = event.touches[0];
+    if (!touch) {
+      return;
+    }
+    touchLastRef.current = { x: touch.clientX, y: touch.clientY };
+    if (touchHandledRef.current) {
+      return;
+    }
+    const deltaX = touch.clientX - touchStartRef.current.x;
+    const deltaY = touch.clientY - touchStartRef.current.y;
+    if (Math.abs(deltaX) > Math.abs(deltaY) * 1.2 && Math.abs(deltaX) > 12) {
+      touchHandledRef.current = true;
+    }
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStartRef.current || isAnimatingRef.current) {
+      touchStartRef.current = null;
+      touchLastRef.current = null;
+      touchHandledRef.current = false;
+      return;
+    }
+    const start = touchStartRef.current;
+    const last = touchLastRef.current ?? start;
+    const handled = touchHandledRef.current;
+    touchStartRef.current = null;
+    touchLastRef.current = null;
+    touchHandledRef.current = false;
+    if (!handled) {
+      return;
+    }
+    const deltaX = last.x - start.x;
+    const deltaY = last.y - start.y;
+    if (
+      Math.abs(deltaX) > Math.abs(deltaY) * 1.2 &&
+      Math.abs(deltaX) > 36
+    ) {
+      shiftCarousel(deltaX < 0 ? 1 : -1);
+    }
+  };
+
+  const handleTouchCancel = () => {
+    touchStartRef.current = null;
+    touchLastRef.current = null;
+    touchHandledRef.current = false;
   };
 
   const handleTransitionEnd = (event: TransitionEvent<HTMLDivElement>) => {
@@ -173,6 +241,10 @@ const Features = () => {
             <div
               id="features-carousel"
               className="overflow-hidden pb-4 px-4 sm:px-6 lg:px-8"
+              onTouchStart={handleTouchStart}
+              onTouchMove={handleTouchMove}
+              onTouchEnd={handleTouchEnd}
+              onTouchCancel={handleTouchCancel}
             >
               <div
                 ref={carouselRef}
