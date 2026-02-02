@@ -265,6 +265,57 @@ section {
   .card-muted {
     @apply rounded-lg border border-border/60 bg-surface/75 p-5;
   }
+
+  .section-reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 0.7s ease,
+      transform 0.7s ease;
+    will-change: opacity, transform;
+  }
+
+  .section-reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .star-surface {
+    background-image:
+      radial-gradient(280px 200px at 18% 20%, rgb(var(--color-primary) / 0.18), transparent 60%),
+      radial-gradient(260px 200px at 82% 80%, rgb(var(--color-accent) / 0.16), transparent 60%),
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.22' stroke-width='1.2'%3E%3Cpolygon points='60,6 72,46 114,46 78,70 92,110 60,86 28,110 42,70 6,46 48,46'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: auto, auto, 120px 120px;
+    background-position: center;
+    pointer-events: none;
+    transform: rotate(-12deg) scale(1.12);
+    transform-origin: center;
+  }
+
+  .star-surface-section {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .star-surface-section::before {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cg fill='none' stroke='%236b7280' stroke-opacity='0.28' stroke-width='1.1'%3E%3Cpolygon points='80,10 96,60 148,60 104,90 120,142 80,112 40,142 56,90 12,60 64,60'/%3E%3C/g%3E%3C/svg%3E");
+    background-size: 160px 160px;
+    background-position: center;
+    opacity: 0.35;
+    transform: rotate(-12deg);
+    transform-origin: center;
+    pointer-events: none;
+    mix-blend-mode: multiply;
+  }
+
+  .star-surface-section > * {
+    position: relative;
+    z-index: 1;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -273,6 +324,12 @@ section {
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
+  }
+
+  .section-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
   }
 
   .marquee {
