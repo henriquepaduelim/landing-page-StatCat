@@ -53,11 +53,7 @@ const CTA = () => {
 
     const cleanName = name.trim();
     const cleanEmail = email.trim();
-    const whatsappMessage = [
-      "New demo request from landing page",
-      `Name: ${cleanName}`,
-      `Email: ${cleanEmail}`,
-    ].join("\n");
+    const whatsappMessage = `Hello, my name is ${cleanName} and I would like to book a demo. My email is ${cleanEmail}.`;
     const whatsappLink = buildWhatsappLink(content.footer.contactWhatsapp, whatsappMessage);
     const popup = window.open(whatsappLink, "_blank", "noopener,noreferrer");
 
