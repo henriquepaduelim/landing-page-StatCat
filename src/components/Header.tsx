@@ -4,7 +4,7 @@ import Icon from "./Icon";
 import { smoothScrollToId } from "../utils/smoothScroll";
 import { createFocusTrap } from "../utils/focusTrap";
 
-const logoUrl = new URL("../../statCatLogo2-black.png", import.meta.url).href;
+const logoUrl = "/media/STATCATSports-logo-design.png";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -48,7 +48,7 @@ const Header = () => {
   };
 
   return (
-    <header className="site-header section-dark border-b border-border/40">
+    <header className="site-header section-dark">
       <div
         className={`mx-auto flex max-w-content items-center justify-between px-4 transition-all duration-200 sm:px-6 lg:px-8 ${
           isCompact ? "h-16" : "h-24"
@@ -57,12 +57,12 @@ const Header = () => {
         <a
           href="#hero"
           onClick={handleNavClick("hero")}
-          className="flex h-full items-center py-0"
+          className="flex h-full items-center self-center"
         >
           <img
             src={logoUrl}
             alt={`${content.brand.name} logo`}
-            className="h-28 w-auto object-contain"
+            className="h-full w-auto origin-center scale-[1.4] object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
           />
         </a>
 

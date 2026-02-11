@@ -1,6 +1,6 @@
 import { content } from "../data/content";
 
-const logoUrl = new URL("../../statCatLogo2-black.png", import.meta.url).href;
+const logoUrl = "/media/STATCATSports-logo-design.png";
 
 const Footer = () => {
   const year = new Date().getFullYear().toString();
