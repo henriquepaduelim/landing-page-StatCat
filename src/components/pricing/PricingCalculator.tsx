@@ -392,7 +392,9 @@ const PricingCalculator = () => {
                 {pricing.cta.primaryLabel}
               </a>
               <a
-                href={`mailto:${content.footer.contactEmail}`}
+                href={content.footer.contactWhatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="btn-outline focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
               >
                 {pricing.cta.secondaryLabel}

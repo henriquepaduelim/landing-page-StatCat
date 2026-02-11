@@ -412,10 +412,13 @@ export const content = {
   footer: {
     line:
       "Athlete development tracking, report cards, scheduling, and clear communication for sports programs across Canada.",
-    contactEmail: "hello@statcatsports.ca",
+    contactEmail: "henrique@statcatsports.net",
+    contactWhatsapp: "https://wa.me/16472905641",
+    contactWhatsappDisplay: "+1 647 290 5641",
     linksHeading: "Links",
     contactHeading: "Contact",
-    contactLabel: "Email",
+    contactWhatsappLabel: "WhatsApp",
+    contactEmailLabel: "Email",
     copyright: "All rights reserved.",
     copyrightTemplate: "(c) {year} {brand}. {rights}",
     proudBadge: "",

@@ -1,4 +1,7 @@
 import { content } from "../data/content";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
+import { faAt } from "@fortawesome/free-solid-svg-icons";
 
 const logoUrl = "/media/STATCATSports-logo-design.png";
 
@@ -45,12 +48,24 @@ const Footer = () => {
             <p className="text-small uppercase tracking-[0.2em] text-muted">
               {content.footer.contactHeading}
             </p>
-            <p className="mt-3 text-small text-muted">
-              {content.footer.contactLabel}:{" "}
-              <a href={`mailto:${content.footer.contactEmail}`}>
-                {content.footer.contactEmail}
-              </a>
-            </p>
+            <a
+              href={content.footer.contactWhatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Abrir conversa no WhatsApp"
+              className="mt-3 inline-flex items-center gap-2 rounded-full border border-border/60 bg-surface/70 px-3 py-1.5 text-small font-semibold text-text transition hover:bg-surface"
+            >
+              <FontAwesomeIcon icon={faWhatsapp} className="text-lg text-[#25D366]" />
+              <span>{content.footer.contactWhatsappLabel}</span>
+            </a>
+            <a
+              href={`mailto:${content.footer.contactEmail}`}
+              aria-label="Enviar e-mail"
+              className="mt-2 inline-flex items-center gap-2 rounded-full border border-border/60 bg-surface/70 px-3 py-1.5 text-small font-semibold text-text transition hover:bg-surface"
+            >
+              <FontAwesomeIcon icon={faAt} className="text-sm" />
+              <span>{content.footer.contactEmailLabel}</span>
+            </a>
           </div>
         </div>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3 border-t border-border/70 pt-6 text-xs text-muted">

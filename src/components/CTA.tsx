@@ -2,6 +2,17 @@ import { useEffect, useState, type FormEvent } from "react";
 import { content } from "../data/content";
 import Icon from "./Icon";
 
+const buildWhatsappLink = (baseUrl: string, message: string) => {
+  try {
+    const url = new URL(baseUrl);
+    url.searchParams.set("text", message);
+    return url.toString();
+  } catch {
+    const separator = baseUrl.includes("?") ? "&" : "?";
+    return `${baseUrl}${separator}text=${encodeURIComponent(message)}`;
+  }
+};
+
 const CTA = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -38,6 +49,20 @@ const CTA = () => {
 
     if (!validate()) {
       return;
+    }
+
+    const cleanName = name.trim();
+    const cleanEmail = email.trim();
+    const whatsappMessage = [
+      "New demo request from landing page",
+      `Name: ${cleanName}`,
+      `Email: ${cleanEmail}`,
+    ].join("\n");
+    const whatsappLink = buildWhatsappLink(content.footer.contactWhatsapp, whatsappMessage);
+    const popup = window.open(whatsappLink, "_blank", "noopener,noreferrer");
+
+    if (!popup) {
+      window.location.href = whatsappLink;
     }
 
     setSubmitted(true);
