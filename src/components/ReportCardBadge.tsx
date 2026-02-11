@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import Icon from "./Icon";
 
 type ReportCardBadgeProps = {
   photoSrc: string;
@@ -36,11 +37,16 @@ const ReportCardBadge = ({ photoSrc, photoAlt }: ReportCardBadgeProps) => {
         setPinned((value) => !value);
         setPulse(true);
       }}
-      className={`group relative w-full max-w-[360px] rounded-[28px] shadow-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg motion-safe:transition-[transform,box-shadow] motion-safe:duration-200 active:scale-[0.99] sm:max-w-[400px] lg:max-w-[440px] ${pulse ? "ring-1 ring-white/20" : ""}`}
+      className={`group relative w-full max-w-[360px] cursor-pointer rounded-[28px] shadow-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg motion-safe:transition-[transform,box-shadow] motion-safe:duration-200 active:scale-[0.99] sm:max-w-[400px] lg:max-w-[440px] ${pulse ? "ring-1 ring-white/20" : ""}`}
       style={{ perspective: "1200px" }}
       aria-pressed={pinned}
-      aria-label="Report card badge preview"
+      aria-label="Tap to flip report card badge preview"
     >
+      <span className="pointer-events-none absolute right-3 top-3 z-20 inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-black/55 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.14em] text-white shadow-strong backdrop-blur-sm">
+        <Icon name="autorenew" className="text-[16px] motion-safe:animate-pulse" />
+        <span>tap to flip</span>
+      </span>
+
       <div
         className="relative min-h-[470px] w-full motion-safe:transition-transform motion-safe:duration-500 sm:min-h-[530px] lg:min-h-[580px]"
         style={{
