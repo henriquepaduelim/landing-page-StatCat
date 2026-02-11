@@ -55,9 +55,25 @@ const App = () => {
   return (
     <div className="page-bg min-h-screen text-text">
       <TrustLine />
-      <Header />
-      <main>
+      <div className="relative isolate overflow-hidden">
+        <video
+          className="absolute inset-0 -z-10 h-full w-full object-cover"
+          src="/media/herolanding.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="metadata"
+          aria-hidden="true"
+        />
+        <div
+          className="absolute inset-0 -z-10 bg-gradient-to-b from-black/55 via-black/45 to-[#0a0d12]/70"
+          aria-hidden="true"
+        />
+        <Header />
         <Hero />
+      </div>
+      <main>
         <SocialProof />
         <Features />
         <HowItWorks />

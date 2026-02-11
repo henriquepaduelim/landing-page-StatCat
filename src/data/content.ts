@@ -30,7 +30,7 @@ export const content = {
     headline:
       "Give your club a branded app that proves progress.",
     subheadline:
-      "StatCat brings development tracking, report cards, schedules, and family updates into one polished experience - branded for your club.",
+      "StatCat is a TeamSnap alternative for football programs that need development tracking, report cards, schedules, and family updates in one branded app.",
     primaryCta: "Book a demo",
     secondaryCta: "Learn More",
     highlights: [
@@ -364,6 +364,11 @@ export const content = {
           "It's your club's own branded app with your name, logo, and colors, so families see your club, not a generic platform.",
       },
       {
+        question: "Is StatCat a TeamSnap alternative?",
+        answer:
+          "Yes. If you're comparing TeamSnap alternatives, StatCat gives your club a branded app with athlete development tracking, report cards, scheduling, and family communication in one place.",
+      },
+      {
         question: "Who owns the data?",
         answer:
           "Your club owns its data. We provide secure access controls and export options for administrators.",
@@ -425,6 +430,7 @@ export const content = {
     links: [
       { label: "Privacy", href: "#" },
       { label: "Terms", href: "#" },
+      { label: "TeamSnap Alternative", href: "/teamsnap-alternative" },
       { label: "Contact", href: "#cta" },
     ],
   },

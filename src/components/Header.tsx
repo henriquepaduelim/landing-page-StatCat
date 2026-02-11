@@ -48,7 +48,7 @@ const Header = () => {
   };
 
   return (
-    <header className="site-header section-dark">
+    <header className="site-header border-b border-white/20">
       <div
         className={`mx-auto flex max-w-content items-center justify-between px-4 transition-all duration-200 sm:px-6 lg:px-8 ${
           isCompact ? "h-16" : "h-24"
@@ -62,41 +62,43 @@ const Header = () => {
           <img
             src={logoUrl}
             alt={`${content.brand.name} logo`}
-            className="h-full w-auto origin-center scale-[1.4] object-contain drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
+            className="h-full w-auto origin-center scale-[1.4] object-contain saturate-[1.12] brightness-[1.4] contrast-[0.88] drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
           />
         </a>
 
-        <nav
-          className="hidden items-center gap-6 text-sm font-semibold text-muted lg:flex"
-          aria-label={content.header.primaryNavLabel}
-        >
-          {content.nav.map((item) => (
-            <a
-              key={item.href}
-              href={`#${item.href}`}
-              onClick={handleNavClick(item.href)}
-              className="site-nav-link"
-            >
-              {item.label}
+        <div className="flex items-center gap-3 rounded-xl bg-black/30 px-3 py-2 backdrop-blur-[2px]">
+          <nav
+            className="hidden items-center gap-6 text-sm font-semibold text-muted lg:flex"
+            aria-label={content.header.primaryNavLabel}
+          >
+            {content.nav.map((item) => (
+              <a
+                key={item.href}
+                href={`#${item.href}`}
+                onClick={handleNavClick(item.href)}
+                className="site-nav-link"
+              >
+                {item.label}
+              </a>
+            ))}
+          </nav>
+
+          <div className="hidden lg:block">
+            <a href="#cta" onClick={handleNavClick("cta")} className="btn-primary">
+              {content.hero.primaryCta}
             </a>
-          ))}
-        </nav>
+          </div>
 
-        <div className="hidden lg:block">
-          <a href="#cta" onClick={handleNavClick("cta")} className="btn-primary">
-            {content.hero.primaryCta}
-          </a>
+          <button
+            type="button"
+            className="inline-flex items-center justify-center rounded-md border border-border bg-surface p-2 text-text shadow-soft transition hover:border-primary/40 lg:hidden"
+            aria-label={content.header.openLabel}
+            aria-expanded={menuOpen}
+            onClick={() => setMenuOpen(true)}
+          >
+            <Icon name="menu" className="text-[22px]" />
+          </button>
         </div>
-
-        <button
-          type="button"
-          className="inline-flex items-center justify-center rounded-md border border-border bg-surface p-2 text-text shadow-soft transition hover:border-primary/40 lg:hidden"
-          aria-label={content.header.openLabel}
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen(true)}
-        >
-          <Icon name="menu" className="text-[22px]" />
-        </button>
       </div>
 
       {menuOpen ? (

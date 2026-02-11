@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Icon from "./Icon";
 
 type ReportCardBadgeProps = {
@@ -11,14 +11,7 @@ const canadaFlagUrl = new URL("../../ca.svg", import.meta.url).href;
 
 const ReportCardBadge = ({ photoSrc, photoAlt }: ReportCardBadgeProps) => {
   const [pinned, setPinned] = useState(false);
-  const [pulse, setPulse] = useState(false);
   const flipped = pinned;
-
-  useEffect(() => {
-    if (!pulse) return;
-    const timeout = window.setTimeout(() => setPulse(false), 240);
-    return () => window.clearTimeout(timeout);
-  }, [pulse]);
 
   const metrics = [
     ["SRS", 60],
@@ -35,9 +28,8 @@ const ReportCardBadge = ({ photoSrc, photoAlt }: ReportCardBadgeProps) => {
       type="button"
       onClick={() => {
         setPinned((value) => !value);
-        setPulse(true);
       }}
-      className={`group relative w-full max-w-[360px] cursor-pointer rounded-[28px] shadow-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg motion-safe:transition-[transform,box-shadow] motion-safe:duration-200 active:scale-[0.99] sm:max-w-[400px] lg:max-w-[440px] ${pulse ? "ring-1 ring-white/20" : ""}`}
+      className="group relative w-full max-w-[360px] cursor-pointer rounded-[28px] shadow-strong focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg motion-safe:transition-[transform,box-shadow] motion-safe:duration-200 active:scale-[0.99] sm:max-w-[400px] lg:max-w-[440px]"
       style={{ perspective: "1200px" }}
       aria-pressed={pinned}
       aria-label="Tap to flip report card badge preview"
