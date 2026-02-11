@@ -115,7 +115,7 @@ const ReportCardBadge = ({ photoSrc, photoAlt }: ReportCardBadgeProps) => {
         </div>
 
         <div
-          className="absolute inset-0 flex items-center justify-center rounded-[28px] bg-[#11131b]"
+          className="absolute inset-0 flex items-center justify-center rounded-[28px] bg-[#cfd7f6]"
           style={{ backfaceVisibility: "hidden", transform: "rotateY(180deg)" }}
         >
           <img
