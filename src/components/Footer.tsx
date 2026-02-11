@@ -18,14 +18,14 @@ const Footer = () => {
         <div className="grid gap-8 lg:grid-cols-[1.4fr_0.8fr_0.8fr]">
           <div>
             <div className="flex items-center gap-3 font-display text-lg font-semibold">
-              <span className="flex h-18 w-18 items-center justify-center rounded-full bg-black">
+
                 <img
                   src={logoUrl}
                   alt={`${content.brand.name} logo`}
-                  className="h-14 w-auto object-contain"
+                  className="h-32 w-auto object-contain"
                 />
-              </span>
-              <span>{content.brand.logoText}</span>
+              
+              
             </div>
             <p className="mt-3 text-small text-muted">{content.brand.tagline}</p>
             <p className="mt-4 text-small text-muted">{content.footer.line}</p>
