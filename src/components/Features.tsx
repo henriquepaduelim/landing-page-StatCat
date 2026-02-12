@@ -10,26 +10,26 @@ const Features = () => {
   const carouselImages = [
     {
       key: "Report cards and evaluations",
-      src: "/media/iphonemockReportcard.png",
+      src: "/media/iphonemockReportcard.webp",
       alt: "Report cards screen on iPhone",
       overlayInset: "9% 12% 18% 12%",
       caption: "Send report cards in a professional, organized format.",
     },
     {
       key: "Scheduling and events",
-      src: "/media/iphonemockscheduling.png",
+      src: "/media/iphonemockscheduling.webp",
       alt: "Scheduling screen on iPhone",
       caption: "Schedule sessions and events in one centralized calendar.",
     },
     {
       key: "Approvals",
-      src: "/media/iphonemockApprove.png",
+      src: "/media/iphonemockApprove.webp",
       alt: "Approvals screen on iPhone",
       caption: "Approve reports submitted by coaches and staff.",
     },
     {
       key: "Communication hub",
-      src: "/media/iphoneRSVP.png",
+      src: "/media/iphoneRSVP.webp",
       alt: "Communication hub screen on iPhone",
       caption: "Confirm attendance for events and keep rosters accurate.",
     },
