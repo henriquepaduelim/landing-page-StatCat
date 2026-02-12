@@ -54,11 +54,11 @@ const TeamSnapAlternativePage = () => {
     setMeta("property", "og:title", title);
     setMeta("property", "og:description", description);
     setMeta("property", "og:url", url);
-    setMeta("property", "og:image", "https://www.statcatsports.net/media/STATCATSports-logo-design.png");
+    setMeta("property", "og:image", "https://www.statcatsports.net/media/STATCATSports-logo-design.webp");
     setMeta("name", "twitter:card", "summary_large_image");
     setMeta("name", "twitter:title", title);
     setMeta("name", "twitter:description", description);
-    setMeta("name", "twitter:image", "https://www.statcatsports.net/media/STATCATSports-logo-design.png");
+    setMeta("name", "twitter:image", "https://www.statcatsports.net/media/STATCATSports-logo-design.webp");
     setCanonical(url);
 
     setJsonLd("teamsnap-alternative-software", {

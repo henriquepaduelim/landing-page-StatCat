@@ -62,6 +62,11 @@ const Header = () => {
           <img
             src={logoUrl}
             alt={`${content.brand.name} logo`}
+            width={1200}
+            height={800}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
             className="h-full w-auto origin-center scale-[1.4] object-contain saturate-[1.12] brightness-[1.4] contrast-[0.88] drop-shadow-[0_4px_10px_rgba(0,0,0,0.5)]"
           />
         </a>
