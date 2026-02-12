@@ -28,14 +28,16 @@ export const content = {
       secondary: "The all-in-one management platform for modern sports programs.",
     },
     headline:
-      "Give your club a branded app that proves progress.",
+      "Your Club. Your App. Real Performance Intelligence.",
+    supportLine:
+      "Give your club a fully branded performance platform designed to track development, centralize data, and elevate athlete progression with measurable clarity.",
     subheadline:
-      "StatCat is a TeamSnap alternative for football programs that need development tracking, report cards, schedules, and family updates in one branded app.",
+      "StatCat Sports empowers academies and development programs with a dedicated club app - customized with your logo, colors, and identity - while delivering structured athlete analytics, report cards, and longitudinal performance tracking in one unified system.",
     primaryCta: "Book a demo",
     secondaryCta: "Learn More",
     highlights: [
-      "Your own branded club app",
-      "Development tracking from sessions to seasons",
+      "Your own app with your logo, name, and colors",
+      "Track athlete progress and development over time",
       "Professional report cards for families",
       "One hub for updates and approvals",
     ],
@@ -62,19 +64,21 @@ export const content = {
     ],
   },
   features: {
-    eyebrow: "Features",
-    title: "The development and communication stack for football programs",
+    eyebrow: "Differentiation",
+    title: "Move Beyond Spreadsheets and Fragmented Tools",
     subtitle:
-      "Run a branded app, track athlete progress, and keep families aligned with professional reporting.",
+      "Clubs often rely on disconnected systems, manual reports, and informal tracking methods. StatCat replaces operational noise with a structured, data-driven environment.",
     highlight: {
-      eyebrow: "Development tracking spotlight",
-      title: "Turn evaluations into long-term development data",
+      eyebrow: "Structured Club Operations",
+      title: "Your athletes do not just train. They evolve - and now that evolution is measurable.",
       description:
-        "Capture combine results, session ratings, and coach notes in one timeline, then share progress in professional report cards.",
+        "Replace disconnected workflows with one platform that tracks, reports, and aligns everyone around measurable development.",
       bullets: [
-        "Track speed, agility, and technical metrics across seasons",
-        "Compare athletes against their own baselines, not just peers",
-        "Export charts and summaries for meetings and parent updates",
+        "Track physical, technical, and tactical metrics",
+        "Monitor longitudinal athlete growth",
+        "Publish standardized performance reports",
+        "Keep staff, athletes, and families aligned",
+        "Strengthen your club's professional image",
       ],
       video: {
         src: "/media/combineChart.webm",
@@ -160,8 +164,10 @@ export const content = {
     ],
   },
   useCases: {
-    eyebrow: "Use cases",
-    title: "Built for every stakeholder",
+    eyebrow: "Authority / Positioning",
+    title: "Performance Data, Structured for Elite Development",
+    subtitle:
+      "StatCat was built with performance governance in mind. Every data point feeds a structured system designed to support coaching decisions, athlete accountability, and long-term development pathways. From grassroots academies to elite programs, StatCat scales with your club.",
     items: [
       {
         title: "Club Directors",
@@ -364,11 +370,6 @@ export const content = {
           "It's your club's own branded app with your name, logo, and colors, so families see your club, not a generic platform.",
       },
       {
-        question: "Is StatCat a TeamSnap alternative?",
-        answer:
-          "Yes. If you're comparing TeamSnap alternatives, StatCat gives your club a branded app with athlete development tracking, report cards, scheduling, and family communication in one place.",
-      },
-      {
         question: "Who owns the data?",
         answer:
           "Your club owns its data. We provide secure access controls and export options for administrators.",
@@ -393,9 +394,9 @@ export const content = {
   },
   cta: {
     eyebrow: "Demo",
-    title: "Give your club its own app for development and communication",
+    title: "Elevate your club's development model.",
     subtitle:
-      "Book a demo to see how StatCat tracks athlete progress, streamlines communication, and keeps families aligned.",
+      "Book a demo and see how your own branded app can transform performance tracking and athlete progression.",
     highlights: [
       "Your club's own app, branded to your name and colors",
       "Report cards and development summaries built in",
@@ -430,7 +431,6 @@ export const content = {
     links: [
       { label: "Privacy", href: "#" },
       { label: "Terms", href: "#" },
-      { label: "TeamSnap Alternative", href: "/teamsnap-alternative" },
       { label: "Contact", href: "#cta" },
     ],
   },

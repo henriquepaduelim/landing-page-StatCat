@@ -48,7 +48,7 @@ const Header = () => {
   };
 
   return (
-    <header className="site-header border-b border-white/20">
+    <header className="site-header">
       <div
         className={`mx-auto flex max-w-content items-center justify-between px-4 transition-all duration-200 sm:px-6 lg:px-8 ${
           isCompact ? "h-16" : "h-24"

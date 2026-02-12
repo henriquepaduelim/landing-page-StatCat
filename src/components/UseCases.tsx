@@ -12,6 +12,9 @@ const UseCases = () => {
           <h2 className="mt-3 font-display text-headline text-text">
             {content.useCases.title}
           </h2>
+          <p className="mx-auto mt-4 max-w-3xl text-body text-muted">
+            {content.useCases.subtitle}
+          </p>
         </div>
         <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-4">
           {content.useCases.items.map((item, index) => (

@@ -6,7 +6,7 @@ const TrustLine = () => {
   const trustLineText = `${content.hero.trustLine.primary} ${content.hero.trustLine.secondary}`;
 
   return (
-    <div className="marquee trustline h-10 border-b border-white/10 bg-black text-white">
+    <div className="marquee trustline h-10 bg-black text-white">
       <span className="sr-only">{trustLineText}</span>
       <div className="marquee-track" aria-hidden="true">
         <span className="flex items-center gap-6 px-6 text-xs uppercase tracking-[0.32em] text-white">
