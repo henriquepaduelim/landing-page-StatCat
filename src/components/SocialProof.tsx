@@ -20,7 +20,7 @@ const SocialProof = () => {
                 muted
                 loop
                 playsInline
-                preload="metadata"
+                preload="none"
                 aria-label="Elite One Goalkeepers app preview"
                 style={{ transformOrigin: "78% 67%" }}
               >
@@ -34,21 +34,26 @@ const SocialProof = () => {
           <div className="grid gap-4 sm:grid-cols-2">
             {content.socialProof.metrics.map((metric) => {
               const isAppCard = metric.value === "Your own app";
+              const isCanadaCard = metric.value === "Canadian support";
+              const isReportCard = metric.value === "Report cards";
+              const isSessionsCard = metric.value === "Sessions to seasons";
               const imageSrc =
-                metric.value === "Sessions to seasons"
-                  ? "/media/mockupiphone.png"
-                  : metric.value === "Report cards"
-                    ? "/media/reportcardsIphone.png"
+                isSessionsCard
+                  ? "/media/mockupiphone.webp"
+                  : isReportCard
+                    ? "/media/reportcardsIphone.webp"
                     : isAppCard
-                      ? "/media/elite1iphoneicone.png"
-                      : metric.value === "Canadian support"
-                        ? "/media/canadaflag.jpg"
-                      : null;
+                      ? "/media/elite1iphoneicone.webp"
+                      : isCanadaCard
+                        ? "/media/canadaflag.webp"
+                        : null;
               const imageAlt = isAppCard
                 ? "StatCat app icon"
-                : metric.value === "Canadian support"
+                : isCanadaCard
                   ? "Canadian flag"
                   : "StatCat mobile app mockup";
+              const imageWidth = isAppCard ? 453 : isCanadaCard ? 1000 : isReportCard ? 900 : 800;
+              const imageHeight = isAppCard ? 912 : isCanadaCard ? 750 : isReportCard ? 900 : 800;
               const zoomOriginClass = isAppCard
                 ? "origin-[25%_75%]"
                 : "origin-center";
@@ -69,6 +74,10 @@ const SocialProof = () => {
                       <img
                         src={imageSrc}
                         alt={imageAlt}
+                        loading="lazy"
+                        decoding="async"
+                        width={imageWidth}
+                        height={imageHeight}
                         className={`h-full w-full ${imageFitClass}`}
                       />
                     ) : (

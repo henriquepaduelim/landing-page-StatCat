@@ -4,7 +4,7 @@ import Icon from "./Icon";
 import { smoothScrollToId } from "../utils/smoothScroll";
 import { createFocusTrap } from "../utils/focusTrap";
 
-const logoUrl = "/media/STATCATSports-logo-design.png";
+const logoUrl = "/media/STATCATSports-logo-design.webp";
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);

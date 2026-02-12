@@ -6,7 +6,7 @@ type ReportCardBadgeProps = {
   photoAlt: string;
 };
 
-const statcatLogoUrl = "/media/STATCATSports-logo-design.png";
+const statcatLogoUrl = "/media/STATCATSports-logo-design.webp";
 const canadaFlagUrl = new URL("../../ca.svg", import.meta.url).href;
 
 const ReportCardBadge = ({ photoSrc, photoAlt }: ReportCardBadgeProps) => {

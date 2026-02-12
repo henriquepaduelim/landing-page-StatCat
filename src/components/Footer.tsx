@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
 import { faAt } from "@fortawesome/free-solid-svg-icons";
 
-const logoUrl = "/media/STATCATSports-logo-design.png";
+const logoUrl = "/media/STATCATSports-logo-design.webp";
 
 const Footer = () => {
   const year = new Date().getFullYear().toString();

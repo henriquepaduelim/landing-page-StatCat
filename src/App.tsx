@@ -63,7 +63,7 @@ const App = () => {
           loop
           muted
           playsInline
-          preload="metadata"
+          preload="none"
           aria-hidden="true"
         />
         <div

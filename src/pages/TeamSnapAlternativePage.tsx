@@ -3,7 +3,7 @@ import Footer from "../components/Footer";
 import Icon from "../components/Icon";
 import { content } from "../data/content";
 
-const logoUrl = "/media/STATCATSports-logo-design.png";
+const logoUrl = "/media/STATCATSports-logo-design.webp";
 
 const setMeta = (key: "name" | "property", value: string, metaContent: string) => {
   let tag = document.head.querySelector<HTMLMetaElement>(`meta[${key}="${value}"]`);
