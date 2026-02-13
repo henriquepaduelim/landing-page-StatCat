@@ -195,7 +195,7 @@ const PricingCalculator = () => {
             <div className="rounded-xl border border-border/70 bg-bg p-5">
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>
-                  <p className="text-small text-muted">
+                  <p id="athlete-range-label" className="text-small text-muted">
                     {pricing.calculator.athleteCountLabel}
                   </p>
                   <p className="text-3xl font-semibold text-text font-mono">
@@ -251,11 +251,16 @@ const PricingCalculator = () => {
                   onValueChange={(value) => applyAthleteCount(value[0])}
                   className="relative flex w-full touch-none select-none items-center"
                   aria-label={pricing.calculator.athleteRangeLabel}
+                  aria-labelledby="athlete-range-label"
                 >
                   <Slider.Track className="relative h-2 w-full grow rounded-full bg-border/60">
                     <Slider.Range className="absolute h-full rounded-full bg-primary" />
                   </Slider.Track>
-                  <Slider.Thumb className="block h-4 w-4 rounded-full border border-border bg-surface shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40" />
+                  <Slider.Thumb
+                    aria-label={pricing.calculator.athleteRangeLabel}
+                    aria-labelledby="athlete-range-label"
+                    className="block h-4 w-4 rounded-full border border-border bg-surface shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                  />
                 </Slider.Root>
               </div>
             </div>

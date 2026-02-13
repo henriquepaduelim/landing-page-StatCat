@@ -14,7 +14,7 @@ const Hero = () => {
     <section id="hero" className="hero-section section-dark relative overflow-hidden">
       <div className="mx-auto grid max-w-content gap-20 px-4 py-hero sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-8">
         <div className="space-y-6 rounded-2xl bg-black/28 p-5 backdrop-blur-[2px] animate-fade-up sm:p-6">
-          <h1 className="font-display text-display text-text">
+          <h1 className="font-display text-display text-[#cfd7f6]">
             {content.hero.headline}
           </h1>
           <p className="max-w-2xl text-title font-semibold text-muted">

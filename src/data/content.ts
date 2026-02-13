@@ -19,7 +19,7 @@ export const content = {
     { label: "How It Works", href: "how-it-works" },
     { label: "Use Cases", href: "use-cases" },
     { label: "Pricing", href: "pricing" },
-    { label: "Testimonials", href: "testimonials" },
+    { label: "Before vs After", href: "testimonials" },
     { label: "FAQ", href: "faq" },
   ],
   hero: {
@@ -329,29 +329,53 @@ export const content = {
     },
   },
   testimonials: {
-    eyebrow: "Testimonials",
-    title: "Trusted by program leaders",
-    items: [
+    eyebrow: "Before vs After",
+    title: "Move From Operational Noise to Measurable Development",
+    subtitle:
+      "Replace scattered tools and manual reporting with one structured environment for performance tracking, communication, and accountability.",
+    before: {
+      title: "Before StatCat",
+      items: [
+        "Data spread across spreadsheets and separate apps",
+        "Manual reports that are hard to standardize",
+        "Limited visibility into long-term athlete progression",
+        "Inconsistent communication across staff and families",
+      ],
+    },
+    after: {
+      title: "After StatCat",
+      items: [
+        "One branded platform under your club identity",
+        "Centralized performance data from session to season",
+        "Standardized report cards for athletes and parents",
+        "Clear alignment between directors, coaches, and families",
+      ],
+    },
+    evidenceTitle: "Live Product Evidence",
+    evidenceItems: [
       {
-        quote:
-          "Our club's own app makes us look professional, and the development history keeps everyone aligned.",
-        name: "Jordan Lee",
-        role: "Club Operations Director",
-        location: "Ontario",
+        title: "Performance Dashboard",
+        description:
+          "Track athlete metrics over time with one view for coaching decisions and progress visibility.",
+        src: "/media/mockupiphone.webp",
+        alt: "Performance dashboard on mobile",
+        tag: "Dashboard",
       },
       {
-        quote:
-          "Report cards and scheduling in one place reduced messaging chaos for our families.",
-        name: "Avery Chen",
-        role: "Head Coach",
-        location: "British Columbia",
+        title: "Professional Report Cards",
+        description:
+          "Publish clear, structured feedback that athletes and families can understand and act on.",
+        src: "/media/reportcardsIphone.webp",
+        alt: "Athlete report cards on mobile",
+        tag: "Report Cards",
       },
       {
-        quote:
-          "Parents appreciate clear progress summaries, and coaches value the evaluation timeline.",
-        name: "Morgan Patel",
-        role: "Program Administrator",
-        location: "Alberta",
+        title: "Session and Attendance Flow",
+        description:
+          "Manage updates and attendance in one workflow to reduce admin noise and keep everyone aligned.",
+        src: "/media/iphoneRSVP.webp",
+        alt: "Session and RSVP workflow on mobile",
+        tag: "Operations",
       },
     ],
   },
