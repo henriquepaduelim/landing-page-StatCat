@@ -34,7 +34,7 @@
   --header-text: 244 239 233;
   --header-muted: 189 176 162;
   --header-border: 255 255 255;
-  --header-font: "Exo 2", sans-serif;
+  --header-font: "Space Grotesk", sans-serif;
 
   --radius-card: 20px;
   --radius-button: 14px;
@@ -202,7 +202,7 @@ section {
   }
 
   .trustline {
-    font-family: "Oxanium", sans-serif;
+    font-family: "Space Grotesk", sans-serif;
     letter-spacing: 0.24em;
   }
 

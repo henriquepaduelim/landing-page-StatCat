@@ -1,7 +1,5 @@
 import { content } from "../data/content";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faWhatsapp } from "@fortawesome/free-brands-svg-icons";
-import { faAt } from "@fortawesome/free-solid-svg-icons";
+import Icon from "./Icon";
 
 const logoUrl = "/media/STATCATSports-logo-design.webp";
 
@@ -54,7 +52,7 @@ const Footer = () => {
               aria-label="Abrir conversa no WhatsApp"
               className="mt-3 inline-flex items-center gap-2 rounded-full bg-white/[0.08] px-3 py-1.5 text-small font-semibold text-text transition hover:bg-white/[0.15]"
             >
-              <FontAwesomeIcon icon={faWhatsapp} className="text-lg text-[#25D366]" />
+              <Icon name="chat" className="text-lg text-[#25D366]" />
               <span>{content.footer.contactWhatsappLabel}</span>
             </a>
             <a
@@ -62,7 +60,7 @@ const Footer = () => {
               aria-label="Enviar e-mail"
               className="mt-2 inline-flex items-center gap-2 rounded-full bg-white/[0.08] px-3 py-1.5 text-small font-semibold text-text transition hover:bg-white/[0.15]"
             >
-              <FontAwesomeIcon icon={faAt} className="text-sm" />
+              <Icon name="alternate_email" className="text-sm" />
               <span>{content.footer.contactEmailLabel}</span>
             </a>
           </div>

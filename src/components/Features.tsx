@@ -4,6 +4,7 @@ import { flushSync } from "react-dom";
 import { motion } from "framer-motion";
 import { content } from "../data/content";
 import Icon from "./Icon";
+import LazyVideo from "./LazyVideo";
 import { revealUp, softScale } from "../motion/presets";
 
 const CAROUSEL_TRANSITION_MS = 420;
@@ -256,15 +257,12 @@ const Features = () => {
             viewport={{ once: true, amount: 0.2 }}
           >
             <div className="group overflow-hidden rounded-card border border-white/10 bg-surface/80 shadow-strong backdrop-blur-md">
-              <video
+              <LazyVideo
                 className="h-full w-full transform-gpu object-cover transition duration-500 ease-out group-hover:scale-[1.3]"
                 src={content.features.highlight.video.src}
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="none"
+                type="video/webm"
                 aria-label={content.features.highlight.video.ariaLabel}
+                poster="/media/profile.photo-1400.webp"
                 style={{ transformOrigin: "74% 64%" }}
               />
             </div>

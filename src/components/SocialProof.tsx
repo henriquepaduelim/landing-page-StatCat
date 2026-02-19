@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { content } from "../data/content";
+import LazyVideo from "./LazyVideo";
 import { revealUp, staggerContainer } from "../motion/presets";
 
 const SocialProof = () => {
@@ -22,21 +23,14 @@ const SocialProof = () => {
             </h2>
             <p className="text-body text-muted">{content.socialProof.subtitle}</p>
             <div className="group w-full max-w-[520px] overflow-hidden rounded-card shadow-soft">
-              <video
+              <LazyVideo
                 className="h-auto w-full transform-gpu object-cover transition duration-500 ease-out group-hover:scale-[1.3]"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="none"
+                src="/media/EliteOneGoalkeepers.webm"
+                type="video/webm"
                 aria-label="Elite One Goalkeepers app preview"
+                poster="/media/profile.photo-1400.webp"
                 style={{ transformOrigin: "78% 67%" }}
-              >
-                <source
-                  src="/media/EliteOneGoalkeepers.webm"
-                  type="video/webm"
-                />
-              </video>
+              />
             </div>
           </motion.div>
           <motion.div
