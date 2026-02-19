@@ -1,2 +1,7 @@
 node_modules/
 dist/
+
+# Lighthouse local reports and artifacts
+*.report.html
+*.report.json
+.lighthouseci/
