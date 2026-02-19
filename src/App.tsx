@@ -23,34 +23,57 @@ const App = () => {
       return;
     }
 
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const desktopQuery = window.matchMedia("(min-width: 1024px)");
     const connection = (navigator as Navigator & {
       connection?: { saveData?: boolean; effectiveType?: string };
     }).connection;
     const constrainedNetwork =
       connection?.saveData === true || /(^|-)2g|3g/.test(connection?.effectiveType ?? "");
 
-    if (mediaQuery.matches || constrainedNetwork) {
+    if (reducedMotionQuery.matches || constrainedNetwork || !desktopQuery.matches) {
       return;
     }
 
-    const scheduleLoad = () => setShouldLoadHeroVideo(true);
     const idle = window as Window & {
       requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number;
       cancelIdleCallback?: (id: number) => void;
     };
+    let cancelled = false;
+    let idleId: number | undefined;
+
+    const scheduleLoad = () => {
+      if (cancelled) {
+        return;
+      }
+      setShouldLoadHeroVideo(true);
+    };
+
+    const onInteraction = () => scheduleLoad();
+
+    window.addEventListener("pointerdown", onInteraction, { once: true, passive: true });
+    window.addEventListener("keydown", onInteraction, { once: true });
+    window.addEventListener("scroll", onInteraction, { once: true, passive: true });
 
     if (typeof idle.requestIdleCallback === "function") {
-      const id = idle.requestIdleCallback(() => scheduleLoad(), { timeout: 2200 });
-      return () => {
-        if (typeof idle.cancelIdleCallback === "function") {
-          idle.cancelIdleCallback(id);
-        }
-      };
+      idleId = idle.requestIdleCallback(() => scheduleLoad(), { timeout: 3600 });
+    } else {
+      idleId = window.setTimeout(scheduleLoad, 2200);
     }
 
-    const timeoutId = window.setTimeout(scheduleLoad, 900);
-    return () => window.clearTimeout(timeoutId);
+    return () => {
+      cancelled = true;
+      window.removeEventListener("pointerdown", onInteraction);
+      window.removeEventListener("keydown", onInteraction);
+      window.removeEventListener("scroll", onInteraction);
+      if (typeof idleId === "number") {
+        if (typeof idle.cancelIdleCallback === "function") {
+          idle.cancelIdleCallback(idleId);
+        } else {
+          window.clearTimeout(idleId);
+        }
+      }
+    };
   }, []);
 
   return (
@@ -65,7 +88,7 @@ const App = () => {
               loop
               muted
               playsInline
-              preload="none"
+              preload="metadata"
               aria-hidden="true"
               poster="/media/profile.photo-1400.webp"
             >

@@ -45,5 +45,5 @@ Note: if a report has `NO_FCP`, it is invalid for comparison and must be re-gene
 
 ## Notes
 
-- Material Symbols are used for icons via the stylesheet in `index.html`.
+- Icons are rendered via local SVG paths in `src/components/Icon.tsx` (no external icon webfont).
 - Theme tokens live in `src/index.css` and are mapped to Tailwind in `tailwind.config.ts`.
