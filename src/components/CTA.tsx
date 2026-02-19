@@ -1,6 +1,8 @@
 import { useEffect, useState, type FormEvent } from "react";
+import { motion } from "framer-motion";
 import { content } from "../data/content";
 import Icon from "./Icon";
+import { revealUp, softScale } from "../motion/presets";
 
 const buildWhatsappLink = (baseUrl: string, message: string) => {
   try {
@@ -69,11 +71,22 @@ const CTA = () => {
   return (
     <section id="cta" className="section-dark py-section">
       <div className="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
-        <div className="card relative overflow-hidden">
+        <motion.div
+          className="card relative overflow-hidden"
+          variants={softScale(0)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           <div className="absolute -right-20 -top-24 h-56 w-56 rounded-full bg-primary/10 blur-3xl" />
           <div className="absolute -bottom-16 left-10 h-48 w-48 rounded-full bg-accent/10 blur-3xl" />
           <div className="relative grid gap-10 lg:grid-cols-[1.1fr_0.9fr]">
-            <div>
+            <motion.div
+              variants={revealUp(0)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+            >
               <p className="text-small uppercase tracking-[0.2em] text-muted">
                 {content.cta.eyebrow}
               </p>
@@ -91,12 +104,16 @@ const CTA = () => {
                   </div>
                 ))}
               </div>
-            </div>
+            </motion.div>
 
-            <form
-              className="rounded-xl border border-border bg-surface/90 p-6 shadow-soft"
+            <motion.form
+              className="rounded-xl bg-white/[0.03] p-6"
               onSubmit={handleSubmit}
               noValidate
+              variants={revealUp(0.12)}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
             >
               <div className="space-y-4">
                 <div>
@@ -109,7 +126,7 @@ const CTA = () => {
                     type="text"
                     value={name}
                     onChange={(event) => setName(event.target.value)}
-                    className="mt-2 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm"
+                    className="mt-2 w-full rounded-md border-0 border-b border-white/20 bg-transparent px-3 py-2 text-sm"
                     aria-invalid={Boolean(errors.name)}
                     aria-describedby={errors.name ? "name-error" : undefined}
                     required
@@ -130,7 +147,7 @@ const CTA = () => {
                     type="email"
                     value={email}
                     onChange={(event) => setEmail(event.target.value)}
-                    className="mt-2 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm"
+                    className="mt-2 w-full rounded-md border-0 border-b border-white/20 bg-transparent px-3 py-2 text-sm"
                     aria-invalid={Boolean(errors.email)}
                     aria-describedby={errors.email ? "email-error" : undefined}
                     required
@@ -146,14 +163,14 @@ const CTA = () => {
                 </button>
                 <p className="text-xs text-muted">{content.cta.consent}</p>
               </div>
-            </form>
+            </motion.form>
           </div>
-        </div>
+        </motion.div>
       </div>
 
       {submitted ? (
         <div
-          className="fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-lg border border-border bg-surface px-4 py-3 text-sm text-text shadow-strong"
+          className="fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-lg border border-white/10 bg-bg-dark/90 px-4 py-3 text-sm text-text shadow-strong backdrop-blur-md"
           role="status"
           aria-live="polite"
         >

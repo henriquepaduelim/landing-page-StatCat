@@ -175,7 +175,7 @@ const PricingCalculator = () => {
 
   return (
     <Tooltip.Provider delayDuration={200}>
-      <div className="card motion-safe:hover:-translate-y-1 motion-safe:hover:shadow-strong">
+      <div className="card">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div>
             <p className="text-small uppercase tracking-[0.2em] text-muted">
@@ -192,7 +192,7 @@ const PricingCalculator = () => {
 
         <div className="mt-8 space-y-6">
           <div className="grid gap-6 lg:grid-cols-3">
-            <div className="rounded-xl border border-border/70 bg-bg p-5">
+            <div className="rounded-xl bg-white/[0.03] p-5">
               <div className="flex flex-wrap items-center justify-between gap-4">
                 <div>
                   <p id="athlete-range-label" className="text-small text-muted">
@@ -206,7 +206,7 @@ const PricingCalculator = () => {
                   <button
                     type="button"
                     onClick={(event) => handleStepper(-1, event.shiftKey)}
-                    className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-sm font-semibold text-text transition hover:bg-bg focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-sm font-semibold text-text transition hover:bg-white/20 focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
                     aria-label="Decrease athlete count"
                   >
                     -
@@ -228,13 +228,13 @@ const PricingCalculator = () => {
                           commitInput();
                         }
                       }}
-                      className="mt-1 w-full rounded-md border border-border bg-surface px-3 py-2 text-sm"
+                      className="mt-1 w-full rounded-md border-0 border-b border-white/20 bg-transparent px-3 py-2 text-sm"
                     />
                   </div>
                   <button
                     type="button"
                     onClick={(event) => handleStepper(1, event.shiftKey)}
-                    className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-surface text-sm font-semibold text-text transition hover:bg-bg focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+                    className="flex h-9 w-9 items-center justify-center rounded-full bg-white/10 text-sm font-semibold text-text transition hover:bg-white/20 focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
                     aria-label="Increase athlete count"
                   >
                     +
@@ -248,25 +248,30 @@ const PricingCalculator = () => {
                   max={maxAthletes}
                   step={1}
                   value={[athleteCount]}
-                  onValueChange={(value) => applyAthleteCount(value[0])}
+                  onValueChange={(value) => {
+                    const nextValue = value[0];
+                    if (typeof nextValue === "number") {
+                      applyAthleteCount(nextValue);
+                    }
+                  }}
                   className="relative flex w-full touch-none select-none items-center"
                   aria-label={pricing.calculator.athleteRangeLabel}
                   aria-labelledby="athlete-range-label"
                 >
-                  <Slider.Track className="relative h-2 w-full grow rounded-full bg-border/60">
+                  <Slider.Track className="relative h-2 w-full grow rounded-full bg-white/15">
                     <Slider.Range className="absolute h-full rounded-full bg-primary" />
                   </Slider.Track>
                   <Slider.Thumb
                     aria-label={pricing.calculator.athleteRangeLabel}
                     aria-labelledby="athlete-range-label"
-                    className="block h-4 w-4 rounded-full border border-border bg-surface shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
+                    className="block h-4 w-4 rounded-full bg-white shadow-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent/40"
                   />
                 </Slider.Root>
               </div>
             </div>
 
             <div
-              className={`rounded-lg border border-border/70 bg-bg p-5 transition motion-safe:transition ${resultHighlight}`}
+              className={`rounded-lg bg-white/[0.03] p-5 transition motion-safe:transition ${resultHighlight}`}
             >
               <p className="text-small text-muted">
                 {pricing.calculator.perAthleteLabelAnnual}
@@ -286,7 +291,7 @@ const PricingCalculator = () => {
             </div>
 
             <div
-              className={`rounded-lg border border-border/70 bg-bg p-5 transition motion-safe:transition ${resultHighlight}`}
+              className={`rounded-lg bg-white/[0.03] p-5 transition motion-safe:transition ${resultHighlight}`}
             >
               <p className="text-small text-muted">
                 {pricing.calculator.estimatedTotalLabel}
@@ -310,7 +315,7 @@ const PricingCalculator = () => {
             </div>
           </div>
 
-          <div className="rounded-xl border border-border/70 bg-surface/80 p-5">
+          <div className="rounded-xl bg-white/[0.03] p-5">
             <div className="flex items-center gap-2">
               <p className="text-small uppercase tracking-[0.2em] text-muted">
                 {pricing.calculator.breakdownTitle}
@@ -328,7 +333,7 @@ const PricingCalculator = () => {
                 <Tooltip.Portal>
                   <Tooltip.Content
                     sideOffset={6}
-                    className="rounded-md border border-border bg-surface px-3 py-2 text-xs text-text shadow-strong"
+                    className="rounded-md bg-bg-dark/95 px-3 py-2 text-xs text-text shadow-strong"
                   >
                     {pricing.calculator.setupTooltip}
                   </Tooltip.Content>
@@ -336,7 +341,7 @@ const PricingCalculator = () => {
               </Tooltip.Root>
             </div>
             <div className="mt-4 grid gap-4 sm:grid-cols-2">
-              <div className="rounded-lg border border-border/70 bg-bg p-4">
+              <div className="rounded-lg bg-white/[0.03] p-4">
                 <p className="text-small font-semibold text-text">
                   {pricing.calculator.breakdownFirstYearLabel}
                 </p>
@@ -344,7 +349,7 @@ const PricingCalculator = () => {
                   {pricing.calculator.breakdownFirstYearBody}
                 </p>
               </div>
-              <div className="rounded-lg border border-border/70 bg-bg p-4">
+              <div className="rounded-lg bg-white/[0.03] p-4">
                 <p className="text-small text-muted">
                   {pricing.calculator.breakdownYearTwoLabel}
                 </p>
@@ -370,7 +375,7 @@ const PricingCalculator = () => {
             <button
               type="button"
               onClick={handleShare}
-              className="mt-2 inline-flex items-center gap-2 rounded-full border border-border/60 bg-surface/80 px-3 py-1 text-xs font-semibold text-text transition hover:bg-surface focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
+              className="mt-2 inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-text transition hover:bg-white/20 focus-visible:ring-2 focus-visible:ring-accent/40 focus-visible:ring-offset-2 focus-visible:ring-offset-bg"
               aria-label={pricing.calculator.shareTooltip}
             >
               <Icon name="content_copy" className="text-base" />
@@ -379,7 +384,7 @@ const PricingCalculator = () => {
           </div>
         </div>
 
-        <div className="mt-8 border-t border-border/60 pt-6">
+        <div className="mt-8 pt-6">
           <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-center">
             <div>
               <h3 className="text-title font-semibold text-text">

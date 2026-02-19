@@ -1,11 +1,19 @@
+import { motion } from "framer-motion";
 import { content } from "../data/content";
 import Icon from "./Icon";
+import { revealUp, staggerContainer } from "../motion/presets";
 
 const Testimonials = () => {
   return (
     <section id="testimonials" className="section-dark py-section">
       <div className="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
+        <motion.div
+          className="text-center"
+          variants={revealUp(0)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           <p className="text-small uppercase tracking-[0.2em] text-muted">
             {content.testimonials.eyebrow}
           </p>
@@ -15,10 +23,16 @@ const Testimonials = () => {
           <p className="mx-auto mt-4 max-w-3xl text-body text-muted">
             {content.testimonials.subtitle}
           </p>
-        </div>
+        </motion.div>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-2">
-          <article className="card">
+        <motion.div
+          className="mt-10 grid gap-6 lg:grid-cols-2"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
+          <motion.article className="card" variants={revealUp(0)}>
             <h3 className="text-title font-semibold text-text">{content.testimonials.before.title}</h3>
             <ul className="mt-4 space-y-3 text-small text-muted">
               {content.testimonials.before.items.map((item) => (
@@ -28,9 +42,9 @@ const Testimonials = () => {
                 </li>
               ))}
             </ul>
-          </article>
+          </motion.article>
 
-          <article className="card">
+          <motion.article className="card" variants={revealUp(0.08)}>
             <h3 className="text-title font-semibold text-text">{content.testimonials.after.title}</h3>
             <ul className="mt-4 space-y-3 text-small text-muted">
               {content.testimonials.after.items.map((item) => (
@@ -40,14 +54,26 @@ const Testimonials = () => {
                 </li>
               ))}
             </ul>
-          </article>
-        </div>
+          </motion.article>
+        </motion.div>
 
-        <div className="mt-10">
+        <motion.div
+          className="mt-10"
+          variants={revealUp(0.08)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           <h3 className="text-title font-semibold text-text">{content.testimonials.evidenceTitle}</h3>
-          <div className="mt-4 grid gap-6 md:grid-cols-3">
+          <motion.div
+            className="mt-4 grid gap-6 md:grid-cols-3"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {content.testimonials.evidenceItems.map((item) => (
-              <article key={item.title} className="card-muted overflow-hidden p-0">
+              <motion.article key={item.title} className="card-muted overflow-hidden p-0" variants={revealUp(0)}>
                 <div className="relative h-44 overflow-hidden bg-bg">
                   <img
                     src={item.src}
@@ -64,10 +90,10 @@ const Testimonials = () => {
                   <h4 className="text-base font-semibold text-text">{item.title}</h4>
                   <p className="mt-2 text-small text-muted">{item.description}</p>
                 </div>
-              </article>
+              </motion.article>
             ))}
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

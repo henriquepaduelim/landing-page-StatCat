@@ -1,8 +1,10 @@
 import type { MouseEvent } from "react";
+import { motion } from "framer-motion";
 import { content } from "../data/content";
 import Icon from "./Icon";
 import ReportCardBadge from "./ReportCardBadge";
 import { smoothScrollToId } from "../utils/smoothScroll";
+import { floatingTransition, revealUp, softScale } from "../motion/presets";
 
 const Hero = () => {
   const handleScroll = (id: string) => (event: MouseEvent<HTMLAnchorElement>) => {
@@ -13,14 +15,21 @@ const Hero = () => {
   return (
     <section id="hero" className="hero-section section-dark relative overflow-hidden">
       <div className="mx-auto grid max-w-content gap-20 px-4 py-hero sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-8">
-        <div className="space-y-6 rounded-2xl bg-black/28 p-5 backdrop-blur-[2px] animate-fade-up sm:p-6">
-          <h1 className="font-display text-display text-[#cfd7f6]">
+        <motion.div
+          variants={revealUp(0.12)}
+          initial="hidden"
+          animate="visible"
+          className="space-y-6 px-1 py-2 sm:px-2"
+        >
+          <h1 className="font-display text-display font-extrabold tracking-[-0.03em] text-text">
             {content.hero.headline}
           </h1>
-          <p className="max-w-2xl text-title font-semibold text-muted">
+          <p className="max-w-[65ch] text-title font-semibold text-muted">
             {content.hero.supportLine}
           </p>
-          <p className="max-w-2xl text-body text-muted">{content.hero.subheadline}</p>
+          <p className="max-w-[65ch] text-body leading-relaxed text-muted">
+            {content.hero.subheadline}
+          </p>
           <div className="flex flex-wrap gap-4">
             <a href="#cta" onClick={handleScroll("cta")} className="btn-primary">
               {content.hero.primaryCta}
@@ -41,14 +50,25 @@ const Hero = () => {
               </li>
             ))}
           </ul>
-        </div>
+        </motion.div>
 
-        <div className="relative flex justify-center animate-fade-in">
-          <ReportCardBadge
-            photoSrc={content.hero.preview.video.src}
-            photoAlt={content.hero.preview.video.label}
-          />
-        </div>
+        <motion.div
+          variants={softScale(0.22)}
+          initial="hidden"
+          animate="visible"
+          className="relative flex justify-center"
+        >
+          <motion.div
+            animate={{ y: [0, -8] }}
+            transition={floatingTransition}
+            className="w-full max-w-[440px]"
+          >
+            <ReportCardBadge
+              photoSrc={content.hero.preview.video.src}
+              photoAlt={content.hero.preview.video.label}
+            />
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

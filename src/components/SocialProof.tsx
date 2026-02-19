@@ -1,11 +1,19 @@
+import { motion } from "framer-motion";
 import { content } from "../data/content";
+import { revealUp, staggerContainer } from "../motion/presets";
 
 const SocialProof = () => {
   return (
     <section id="social-proof" className="section-light py-section">
       <div className="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
         <div className="grid gap-8 lg:grid-cols-[1fr_1.2fr]">
-          <div className="space-y-5">
+          <motion.div
+            className="space-y-5"
+            variants={revealUp(0)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <p className="text-small uppercase tracking-[0.2em] text-muted">
               {content.socialProof.eyebrow}
             </p>
@@ -13,7 +21,7 @@ const SocialProof = () => {
               {content.socialProof.title}
             </h2>
             <p className="text-body text-muted">{content.socialProof.subtitle}</p>
-            <div className="group w-full max-w-[520px] overflow-hidden rounded-2xl shadow-soft">
+            <div className="group w-full max-w-[520px] overflow-hidden rounded-card shadow-soft">
               <video
                 className="h-auto w-full transform-gpu object-cover transition duration-500 ease-out group-hover:scale-[1.3]"
                 autoPlay
@@ -30,8 +38,14 @@ const SocialProof = () => {
                 />
               </video>
             </div>
-          </div>
-          <div className="grid gap-4 sm:grid-cols-2">
+          </motion.div>
+          <motion.div
+            className="grid gap-4 sm:grid-cols-2"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             {content.socialProof.metrics.map((metric) => {
               const isAppCard = metric.value === "Your own app";
               const isCanadaCard = metric.value === "Canadian support";
@@ -63,9 +77,10 @@ const SocialProof = () => {
               const imageFitClass = isAppCard ? "object-contain" : "object-cover";
 
               return (
-                <div
+                <motion.div
                   key={metric.label}
                   className="card-muted group relative min-h-[200px] overflow-hidden p-0"
+                  variants={revealUp(0)}
                 >
                   <div
                     className={`absolute inset-0 transition-transform duration-300 ${hoverScaleClass} ${zoomOriginClass}`}
@@ -91,10 +106,10 @@ const SocialProof = () => {
                     </p>
                     <p className="text-small text-white/80">{metric.label}</p>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

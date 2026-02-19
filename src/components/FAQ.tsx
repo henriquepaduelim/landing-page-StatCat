@@ -1,6 +1,8 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { content } from "../data/content";
 import Icon from "./Icon";
+import { revealUp, staggerContainer } from "../motion/presets";
 
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
@@ -8,21 +10,33 @@ const FAQ = () => {
   return (
     <section id="faq" className="section-light py-section">
       <div className="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
+        <motion.div
+          className="text-center"
+          variants={revealUp(0)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           <p className="text-small uppercase tracking-[0.2em] text-muted">
             {content.faq.eyebrow}
           </p>
           <h2 className="mt-3 font-display text-headline text-text">
             {content.faq.title}
           </h2>
-        </div>
-        <div className="mt-10 space-y-4">
+        </motion.div>
+        <motion.div
+          className="mt-10 space-y-4"
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           {content.faq.items.map((item, index) => {
             const isOpen = openIndex === index;
             const answerId = `faq-answer-${index}`;
 
             return (
-              <div key={item.question} className="card">
+              <motion.div key={item.question} className="card" variants={revealUp(0)}>
                 <h3>
                   <button
                     type="button"
@@ -50,10 +64,10 @@ const FAQ = () => {
                     {item.answer}
                   </p>
                 ) : null}
-              </div>
+              </motion.div>
             );
           })}
-        </div>
+        </motion.div>
       </div>
     </section>
   );

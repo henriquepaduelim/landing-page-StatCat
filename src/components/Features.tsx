@@ -1,8 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import type { TouchEvent, TransitionEvent } from "react";
 import { flushSync } from "react-dom";
+import { motion } from "framer-motion";
 import { content } from "../data/content";
 import Icon from "./Icon";
+import { revealUp, softScale } from "../motion/presets";
 
 const CAROUSEL_TRANSITION_MS = 420;
 
@@ -180,9 +182,15 @@ const Features = () => {
         }
         if (direction === 1) {
           const [first, ...rest] = items;
+          if (!first) {
+            return items;
+          }
           return [...rest, first];
         }
         const last = items[items.length - 1];
+        if (!last) {
+          return items;
+        }
         return [last, ...items.slice(0, -1)];
       });
     });
@@ -198,7 +206,13 @@ const Features = () => {
   return (
     <section id="features" className="section-dark py-section">
       <div className="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
+        <motion.div
+          className="text-center"
+          variants={revealUp(0)}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+        >
           <p className="text-small uppercase tracking-[0.2em] text-muted">
             {content.features.eyebrow}
           </p>
@@ -206,10 +220,16 @@ const Features = () => {
             {content.features.title}
           </h2>
           <p className="mt-4 text-body text-muted">{content.features.subtitle}</p>
-        </div>
+        </motion.div>
 
         <div className="mt-10 grid gap-8 lg:grid-cols-[1fr_1.1fr] lg:items-center">
-          <div className="space-y-4">
+          <motion.div
+            className="space-y-4"
+            variants={revealUp(0.08)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
             <p className="text-small uppercase tracking-[0.2em] text-muted">
               {content.features.highlight.eyebrow}
             </p>
@@ -227,10 +247,15 @@ const Features = () => {
                 </li>
               ))}
             </ul>
-          </div>
+          </motion.div>
 
-          <figure>
-            <div className="group overflow-hidden rounded-2xl bg-surface/90 shadow-strong">
+          <motion.figure
+            variants={softScale(0.12)}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+          >
+            <div className="group overflow-hidden rounded-card border border-white/10 bg-surface/80 shadow-strong backdrop-blur-md">
               <video
                 className="h-full w-full transform-gpu object-cover transition duration-500 ease-out group-hover:scale-[1.3]"
                 src={content.features.highlight.video.src}
@@ -249,7 +274,7 @@ const Features = () => {
               </span>
               <span>{content.features.highlight.video.caption}</span>
             </figcaption>
-          </figure>
+          </motion.figure>
         </div>
 
         <div className="mt-12 -mx-4 sm:-mx-6 lg:-mx-8">

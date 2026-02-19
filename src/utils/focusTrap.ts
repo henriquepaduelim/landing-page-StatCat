@@ -14,8 +14,9 @@ export const createFocusTrap = (container: HTMLElement, onClose: () => void) => 
     );
 
   const focusables = getFocusable();
-  if (focusables.length > 0) {
-    focusables[0].focus();
+  const initialFocus = focusables[0];
+  if (initialFocus) {
+    initialFocus.focus();
   }
 
   const handleKeydown = (event: KeyboardEvent) => {
@@ -35,6 +36,9 @@ export const createFocusTrap = (container: HTMLElement, onClose: () => void) => 
 
     const first = items[0];
     const last = items[items.length - 1];
+    if (!first || !last) {
+      return;
+    }
     const active = document.activeElement as HTMLElement | null;
 
     if (event.shiftKey && active === first) {

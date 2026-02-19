@@ -5,16 +5,25 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        primary: "rgb(var(--color-primary) / <alpha-value>)",
-        secondary: "rgb(var(--color-secondary) / <alpha-value>)",
-        accent: "rgb(var(--color-accent) / <alpha-value>)",
-        bg: "rgb(var(--color-bg) / <alpha-value>)",
+        "brand-primary": "rgb(var(--color-brand-primary) / <alpha-value>)",
+        "brand-accent": "rgb(var(--color-brand-accent) / <alpha-value>)",
+        "bg-deep": "rgb(var(--color-bg-deep) / <alpha-value>)",
+        "bg-dark": "rgb(var(--color-bg-dark) / <alpha-value>)",
+        "text-primary": "rgb(var(--color-text-primary) / <alpha-value>)",
+        "text-muted": "rgb(var(--color-text-muted) / <alpha-value>)",
+        "border-subtle": "rgb(var(--color-border-subtle) / <alpha-value>)",
+        primary: "rgb(var(--color-brand-primary) / <alpha-value>)",
+        secondary: "rgb(var(--color-brand-accent) / <alpha-value>)",
+        accent: "rgb(var(--color-brand-accent) / <alpha-value>)",
+        bg: "rgb(var(--color-bg-dark) / <alpha-value>)",
         surface: "rgb(var(--color-surface) / <alpha-value>)",
-        text: "rgb(var(--color-text) / <alpha-value>)",
-        muted: "rgb(var(--color-muted) / <alpha-value>)",
-        border: "rgb(var(--color-border) / <alpha-value>)",
+        text: "rgb(var(--color-text-primary) / <alpha-value>)",
+        muted: "rgb(var(--color-text-muted) / <alpha-value>)",
+        border: "rgb(var(--color-border-subtle) / <alpha-value>)",
       },
       borderRadius: {
+        card: "var(--radius-card)",
+        button: "var(--radius-button)",
         sm: "var(--radius-sm)",
         md: "var(--radius-md)",
         lg: "var(--radius-lg)",
@@ -23,7 +32,12 @@ const config: Config = {
       },
       boxShadow: {
         soft: "var(--shadow-soft)",
+        glow: "var(--shadow-glow)",
         strong: "var(--shadow-strong)",
+      },
+      backgroundImage: {
+        "gradient-brand": "var(--gradient-brand)",
+        "gradient-dark-overlay": "var(--gradient-dark-overlay)",
       },
       maxWidth: {
         content: "var(--container-lg)",
@@ -40,7 +54,7 @@ const config: Config = {
         body: "var(--font-body)",
       },
       fontSize: {
-        display: ["var(--text-display)", { lineHeight: "var(--line-display)", letterSpacing: "-0.02em" }],
+        display: ["var(--text-display)", { lineHeight: "var(--line-display)", letterSpacing: "-0.03em" }],
         headline: ["var(--text-headline)", { lineHeight: "var(--line-tight)", letterSpacing: "-0.01em" }],
         title: ["var(--text-title)", { lineHeight: "var(--line-tight)" }],
         body: ["var(--text-body)", { lineHeight: "var(--line-body)" }],
